@@ -8123,7 +8123,7 @@ var APP_DATA = {
           "yaw": 0.08552455648218249,
           "pitch": 0.08650718311894678,
           "rotation": 0,
-          "target": "151-38-alberca-bicentenario-area-camastros_"
+          "target": "158-38-alberca-bicentenario-lado-barra_"
         },
         {
           "yaw": -0.9613206444313889,

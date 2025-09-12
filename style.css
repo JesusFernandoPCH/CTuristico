@@ -44,7 +44,7 @@
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-  max-width: 900px;
+  max-width: 90px;
   width: 90vw;
   max-height: 90vh;
   overflow: auto;
@@ -69,23 +69,14 @@
 }
 .info-tour-modal-flex {
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  min-height: 420px;
+  flex-direction: column; /* Ensure content is in a single column */
+  gap: 1em; /* Add spacing between elements */
 }
 .info-tour-modal-img {
-  flex: 1 1 45%;
-  min-width: 260px;
-  max-width: 400px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  background: #f7f7f7;
-  border-radius: 8px 0 0 8px;
-  overflow: auto;
-  padding: 18px 0;
-  gap: 18px;
+  flex-direction: column; /* Stack images vertically */
+  align-items: center; /* Center images horizontally */
+  gap: 1em; /* Add spacing between images */
 }
 .info-tour-modal-img img {
   width: 90%;
@@ -102,6 +93,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: justify; /* Improve text readability */
 }
 .info-tour-title {
   font-size: 2.2em;
@@ -230,11 +222,11 @@ body.fullscreen-enabled.mobile #titleBar {
 
 /* If there are multiple scenes the title bar must make space for the scene list toggle */
 body.multiple-scenes #titleBar {
-  left: 40px;
+  left: 70px; /* Increased spacing to avoid overlap */
 }
 
 body.multiple-scenes.mobile #titleBar {
-  left: 50px;
+  left: 80px; /* Increased spacing for mobile */
 }
 
 #titleBar .sceneName {
@@ -365,18 +357,18 @@ body.fullscreen-enabled.mobile #autorotateToggle {
 
 #sceneListToggle {
   position: absolute;
-  top: 0;
+  top: 100;
   left: 0;
-  width: 40px;
-  height: 40px;
+  width: 60px; /* Increased width */
+  height: 60px; /* Increased height */
   padding: 5px;
   background-color: rgb(103,115,131);
   background-color: rgba(103,115,131,0.8);
 }
 
 .mobile #sceneListToggle {
-  width: 50px;
-  height: 50px;
+  width: 70px; /* Increased width for mobile */
+  height: 70px; /* Increased height for mobile */
 }
 
 #sceneListToggle .text {
@@ -767,7 +759,6 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   overflow-y: auto;
-  visibility: hidden;
   /* rotate(90deg) causes transition flicker on Firefox 58 */
   -ms-transform: perspective(200px) rotateX(-89.999deg);
   -webkit-transform: perspective(200px) rotateX(-89.999deg);
@@ -852,23 +843,14 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
 }
 .ubicacion-modal-flex {
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  min-height: 420px;
+  flex-direction: column; /* Ensure content is in a single column */
+  gap: 1em; /* Add spacing between elements */
 }
 .ubicacion-modal-img {
-  flex: 1 1 45%;
-  min-width: 260px;
-  max-width: 400px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  background: #f7f7f7;
-  border-radius: 8px 0 0 8px;
-  overflow: auto;
-  padding: 18px 0;
-  gap: 18px;
+  flex-direction: column; /* Stack images vertically */
+  align-items: center; /* Center images horizontally */
+  gap: 1em; /* Add spacing between images */
 }
 .ubicacion-modal-img img {
   width: 90%;
@@ -885,6 +867,7 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: justify; /* Improve text readability */
 }
 .ubicacion-title {
   font-size: 2.2em;
@@ -1013,11 +996,11 @@ body.fullscreen-enabled.mobile #titleBar {
 
 /* If there are multiple scenes the title bar must make space for the scene list toggle */
 body.multiple-scenes #titleBar {
-  left: 40px;
+  left: 70px; /* Increased spacing to avoid overlap */
 }
 
 body.multiple-scenes.mobile #titleBar {
-  left: 50px;
+  left: 80px; /* Increased spacing for mobile */
 }
 
 #titleBar .sceneName {
@@ -1150,16 +1133,16 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   position: absolute;
   top: 0;
   left: 0;
-  width: 40px;
-  height: 40px;
+  width: 60px; /* Increased width */
+  height: 60px; /* Increased height */
   padding: 5px;
   background-color: rgb(103,115,131);
   background-color: rgba(103,115,131,0.8);
 }
 
 .mobile #sceneListToggle {
-  width: 50px;
-  height: 50px;
+  width: 70px; /* Increased width for mobile */
+  height: 70px; /* Increased height for mobile */
 }
 
 #sceneListToggle .text {
@@ -1550,7 +1533,6 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   overflow-y: auto;
-  visibility: hidden;
   /* rotate(90deg) causes transition flicker on Firefox 58 */
   -ms-transform: perspective(200px) rotateX(-89.999deg);
   -webkit-transform: perspective(200px) rotateX(-89.999deg);
@@ -1840,10 +1822,10 @@ body.view-control-buttons .viewControlButton {
 /* Botón hamburguesa */
 .custom-menu-toggle {
   position: fixed;
-  top: 28px;
+  top: 70px;
   right: 28px;
-  width: 44px;
-  height: 44px;
+  width: 60px; /* Increased width */
+  height: 60px; /* Increased height */
   background: rgba(255,255,255,0.92);
   border: none;
   border-radius: 8px;
@@ -1857,8 +1839,8 @@ body.view-control-buttons .viewControlButton {
 }
 .custom-menu-toggle span {
   display: block;
-  width: 26px;
-  height: 4px;
+  width: 36px; /* Adjusted width of the inner bars */
+  height: 5px; /* Adjusted height of the inner bars */
   margin: 3px 0;
   background: #222;
   border-radius: 2px;
@@ -1869,7 +1851,7 @@ body.view-control-buttons .viewControlButton {
 .custom-title-bar {
   position: fixed;
   top: 32px;
-  left: 32px;
+  left: 60px;
   z-index: 1001;
   display: flex;
   flex-direction: column;
@@ -1881,7 +1863,7 @@ body.view-control-buttons .viewControlButton {
   font-family: 'Montserrat', Arial, sans-serif;
   font-size: 2em;
   font-weight: 600;
-  padding: 8px 32px 8px 18px;
+  padding: 8px 2px 8px 8px;
   border-radius: 4px 4px 0 0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   letter-spacing: 2px;
