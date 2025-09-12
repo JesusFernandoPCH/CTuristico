@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Project Title</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style> @-ms-viewport { width: device-width; } </style>
+<link rel="stylesheet" href="vendor/reset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="multiple-scenes view-control-buttons">
+
+<div id="titleBar">
+    <div id="customTitleBar" class="custom-title-bar">
+      <div class="custom-title-main">Fiesta Americana Hacienda San Antonio El Puente</div>
+      <div class="custom-title-sub" id="customTitleSub"></div>
+    </div>
+  </div>
+
+<!-- Menú lateral derecho -->
+<div id="customMenu" class="custom-menu">
+  <div class="custom-menu-header">
+    <img src="img/Logo.png" alt="Logo" class="custom-menu-logo" id="customMenuLogo">
+    <div class="custom-menu-company">Fiesta Americana Hacienda San Antonio El Puente</div>
+  </div>
+  <ul class="custom-menu-list">
+    <li><a href="#" id="infoTourBtn">Información</a></li>
+    ━━━━━━━━━━━━━
+    <li><a href="#" id="ubicacionBtn">Ubicación</a></li>
+  <!-- Modal Ubicación -->
+  <div id="ubicacionModal" class="info-tour-modal">
+    <div class="info-tour-modal-bg"></div>
+    <div class="info-tour-modal-content">
+      <button class="info-tour-modal-close" id="ubicacionClose" aria-label="Cerrar">&times;</button>
+       <div class="mapouter"><div class="gmap_canvas"><iframe width="950" height="641" id="gmap_canvas" src="https://maps.google.com/maps?q=Reforma+No.+2%2C+Col.+Real+del+Puente+Xochitepec%2C+62790&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://online.stopwatch-timer.net/">stopwatch timer</a><br><a href="https://textcaseconvert.com/"></a><br><style>.mapouter{position: relative;text-align: right;height: 641px;width: 950px;}</style><a href="https://www.embedmaps.co">location map</a><style>.gmap_canvas{overflow: hidden;background: none !important;height: 641px;width: 950px;}</style></div></div>
+    </div>
+  </div>
+    ━━━━━━━━━━━━━
+    <li><a href="#" id="planoBtn">Mapa</a></li>
+  <!-- Modal Plano -->
+  <div id="planoModal" class="info-tour-modal">
+    <div class="info-tour-modal-bg"></div>
+    <div class="info-tour-modal-content">
+      <button class="info-tour-modal-close" id="planoClose" aria-label="Cerrar">&times;</button>
+      <div class="info-tour-modal-flex">
+        <div class="info-tour-modal-img">
+          <img src="img/Numeros.png" alt="Ubicación Hotel" />
+        </div>
+        <div class="info-tour-modal-text">
+          <h2 class="info-tour-title">Mapa</h2>
+          <div class="info-tour-desc info-tour-desc-large" style="font-size:1.25em; line-height:1.5; color:#222; text-align:center;">
+            <img src="img/Mapa.png" alt="Ubicación Hotel" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    ━━━━━━━━━━━━━
+  </ul>
+
+  <!-- Modal Información del Tour -->
+  <div id="infoTourModal" class="info-tour-modal">
+    <div class="info-tour-modal-bg"></div>
+    <div class="info-tour-modal-content">
+      <button class="info-tour-modal-close" id="infoTourClose" aria-label="Cerrar">&times;</button>
+      <div class="info-tour-modal-flex">
+        <div class="info-tour-modal-img">
+          <img src="img/info-tour.jpeg" alt="Información del Tour" />
+          <img src="img/info-tour1.jpeg" alt="Historia Hacienda" class="info-tour-img-inline" />
+          <img src="img/info-tour2.jpeg" alt="Historia Hacienda" class="info-tour-img-inline" />
+          <img src="img/info-tour3.jpg" alt="Historia Hacienda" class="info-tour-img-inline" />
+          <img src="img/info-tour4.jpg" alt="Historia Hacienda" class="info-tour-img-inline" />
+          <img src="img/info-tour5.jpg" alt="Historia Hacienda" class="info-tour-img-inline" />
+          <img src="img/info-tour6.jpg" alt="Historia Hacienda" class="info-tour-img-inline" />
+        </div>
+        <div class="info-tour-modal-text">
+          <h2 class="info-tour-title">Fiesta Americana Hacienda San Antonio El Puente</h2>
+          <h3 class="info-tour-subtitle" style="font-size:1.4em; color:#ff8200; margin-bottom:1em;">Historia de la Hacienda</h3>
+          <div class="info-tour-desc info-tour-desc-large" style="font-size:1.15em; line-height:1.5; color:#222;">
+            <p><strong>En el estado de Morelos, prácticamente la totalidad de las haciendas se dedicaron principalmente al cultivo de caña, producción de azúcar y productos afines.</strong></p>
+            <p>Tal es el caso de la Hacienda San Antonio El Puente, misma que remonta sus orígenes como centro productor hacia fines del siglo XVI, cuando se otorgan las primeras Mercedes Reales por parte de la Corona Española con la finalidad de explotar la tierra con cultivos de Caña.</p>
+            <p>Así comienza esta larga historia y será a mediados del siglo XVIII cuando ya cuenta con una extensión considerable de más de 4000 Hectáreas y el casco de la Hacienda se encuentra prácticamente consolidado como lo podemos apreciar hoy en día con la magnificencia que caracteriza estos grandes centros productores de la región, con sus bóvedas de cañón, arcadas y demás elementos característicos del siglo XVI. Para estas fechas, cuenta con el cuarto de calderas, donde se procesa el jugo de caña, producto de la molienda, misma que en esta temprana época se procesa a base de una rueda hidráulica que más adelante sería sustituida por máquinas eléctricas o de vapor. Cuenta además con los purgares, los patios o asoleaderos, las torres, talleres de carpintería, caballerizas, la huerta y desde luego la casa principal, misma que además de la familia de los hacendados daba cabida al personal de confianza, tales como el administrador, mayordomos, nanas, el médico, el sacerdote, mozos, cocineras, etc., ya que los peones o jornaleros vivían en unos terrenos denominados “El Real” que se ubican a corta distancia, pero fuera del casco de la hacienda.</p>
+            <p>En la época porfirista, cuando estas Haciendas llegaron a su esplendor, perteneció al Sr. Ramón Portillo y Gómez, quien fue uno de los Hacenderos con mayor conocimiento de todos los aspectos del riego, incluso escribió un libro que ayudo a muchos Hacendados de su tiempo para mejorar las técnicas hidráulicas en sus cultivos. Para fines del siglo XIX está sería la primera hacienda en utilizar una turbina hidráulica con un generador de energía eléctrica, aprovechando la altura y el caudal que él proporciona su acueducto, para esta época también es junto con la Hacienda de Vista hermosa las únicas que dejan de producir azúcar para iniciar la producción de alcohol de caña.</p>
+            <p>En los inicios del siglo XX esta hacienda, como todas las del estado y de la república, son paralizadas en su producción por el movimiento Revolucionario, siendo expropiadas sus tierras.</p>
+            <p>Bajo estos techos justo un día antes de la toma de la Ciudad de Cuernavaca, el General Asunción, Solo pernocta en la hacienda, con un contingente de más de 2000 hombres, para dirigirse al día siguiente a la entrega de las llaves de la ciudad al General Emiliano Zapata.</p>
+            <p>Posteriormente, lo que quedó de la Hacienda, fue convertida en molino de arroz y para los años 50´s fue transformada en balneario, por estas fechas, se rodaron por importantes filmes, con personajes del cine nacional, “Los Gavilanes” con Pedro Infante y “El Ciclón” con Miguel A veces Mejía.</p>
+            <p>Actualmente sus instalaciones han sido bellamente acondicionadas para albergar a un Hotel Categoría Especial, con todas las comodidades y tecnologías modernas para sus exigentes huéspedes y es también un bello escenario donde se filman desde programas de televisión y telenovelas hasta concursos de belleza.</p>
+          </div>
+          <a href="https://posadas.contactless.gocloud1.com/fahp" target="_blank" class="info-tour-btn">MyServices</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-menu-footer">
+    <div class="custom-menu-contact">
+      <div>Fiesta Americana</div>
+      <div>GSHFAHP@Posadas.com</div>
+      <div>posadas.contactless.gocloud1.com/fahp</div>
+      <div>Tel. 777 362 0770</div>
+    </div>
+  </div>
+</div>
+
+<!-- Botón hamburguesa -->
+<button id="customMenuToggle" class="custom-menu-toggle" aria-label="Abrir menú">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<div id="pano"></div>
+
+<div id="sceneList">
+  <ul class="scenes">
+    
+      <a href="javascript:void(0)" class="scene" data-id="0-15-recepcin">
+        <li class="text">15. Recepción</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="1-28-entrada-explanada">
+        <li class="text">28. Entrada Explanada</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="2-28-explanada-lado-la-distral">
+        <li class="text">28. Explanada lado La Distral</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="3-28-explanada-lado-recepcin">
+        <li class="text">28. Explanada Lado Recepción</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="4-28-explanada-para-huerto">
+        <li class="text">28. Explanada para Huerto</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="5-28-explanada">
+        <li class="text">28. Explanada</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="6-26-la-distral-anfitrin_">
+        <li class="text">26. La Distral, Anfitrión</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="7-26-la-distral-caja_">
+        <li class="text">26. La Distral, Caja</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="8-26-la-distral-canino-explanada_">
+        <li class="text">26. La Distral, Canino Explanada</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="9-26-la-distral-entrada_">
+        <li class="text">26. La Distral, Entrada</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="10-26-la-distral-estufa_">
+        <li class="text">26. La Distral, Estufa</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="11-26-la-distral-madera-1_">
+        <li class="text">26. La Distral, Madera 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="12-26-la-distral-mrmol-entrada_">
+        <li class="text">26. La Distral, Mármol Entrada</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="13-26-la-distral-mrmol-vinos_">
+        <li class="text">26. La Distral, Mármol Vinos</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="14-26-la-distral-mrmol_">
+        <li class="text">26. La Distral, Mármol</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="15-26-la-distral-parrilla-en-uso">
+        <li class="text">26. La Distral, Parrilla en Uso</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="16-26-la-distral-parrilla_">
+        <li class="text">26. La Distral, Parrilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="17-26-la-distral-puente-entrada_">
+        <li class="text">26. La Distral, Puente Entrada</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="18-26-la-distral-puente-salida_">
+        <li class="text">26. La Distral, Puente Salida</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="19-26-la-distral-terraza-madera_1">
+        <li class="text">26. La Distral, Terraza Madera 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="20-26-la-distral-terraza-madera_">
+        <li class="text">26. La Distral, Terraza Madera</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="21-26-la-distral-terraza-mrmol_">
+        <li class="text">26. La Distral, Terraza Mármol</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="22-26-la-distral-zona-buffet_">
+        <li class="text">26. La Distral, Zona Buffet</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="23-33-jardn-del-lago-camino-aledao_">
+        <li class="text">33. Jardín del Lago, Camino Aledaño</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="24-33-jardn-del-lago-columpio_">
+        <li class="text">33. Jardín del Lago, columpio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="25-33-jardn-del-lago-este_">
+        <li class="text">33. Jardín del Lago, Este</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="26-33-jardn-del-lago-lado-noreste_">
+        <li class="text">33. Jardín del Lago, Lado Noreste</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="27-33-jardn-del-lago-lado-oeste">
+        <li class="text">33. Jardín del lago, Lado Oeste</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="28-33-jardn-del-lago-lado-sur">
+        <li class="text">33. Jardín del Lago, Lado Sur</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="29-33-jardn-del-lago-lado-suroeste_">
+        <li class="text">33. Jardín del Lago, Lado SurOeste</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="30-33-jardn-del-lago-puente_">
+        <li class="text">33. Jardín del Lago, Puente</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="31-33-jardn-del-lago-red-de-voleibol_">
+        <li class="text">33. Jardín del lago, Red de Voleibol</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="32-33-jardn-del-lago-sendero-oeste_1">
+        <li class="text">33. Jardín del Lago, Sendero Oeste 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="33-33-jardn-del-lago-sendero-oeste_">
+        <li class="text">33. Jardín del Lago, Sendero Oeste</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="34-33-jardn-del-lago-villas_">
+        <li class="text">33. Jardín del Lago, Villas</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="35-33-villa-3">
+        <li class="text">33. Villa 3</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="36-36-villa-1">
+        <li class="text">36. Villa 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="37-36-villa-2-y-3">
+        <li class="text">36. Villa 2 Y 3</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="38-36-villa-6">
+        <li class="text">36. Villa 6</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="39-36-villa-7-y-8">
+        <li class="text">36. Villa 7 y 8</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="40-36-villas-5-y-6">
+        <li class="text">36. Villas 5 y 6</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="41-37-segunda-alberca-1">
+        <li class="text">37. Segunda alberca 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="42-37-segunda-alberca-2">
+        <li class="text">37. Segunda alberca 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="43-37-segunda-alberca-3">
+        <li class="text">37. Segunda alberca 3</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="44-37-segunda-alberca-4">
+        <li class="text">37. Segunda alberca 4</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="45-37-segunda-alberca-5">
+        <li class="text">37. Segunda alberca 5</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="46-37-segunda-alberca-6">
+        <li class="text">37. Segunda alberca 6</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="47-37-segunda-alberca-baos_">
+        <li class="text">37. Segunda alberca Baños</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="48-32-habitacin-127-huerto-2">
+        <li class="text">32. Habitación 127 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="49-32-habitacin-128-huerto-2">
+        <li class="text">32. Habitación 128 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="50-32-habitacin-129-huerto-2">
+        <li class="text">32. Habitación 129 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="51-32-habitacin-130-huerto-2">
+        <li class="text">32. Habitación 130 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="52-32-habitacin-131-huerto-2">
+        <li class="text">32. Habitación 131 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="53-32-habitacin-267-huerto-2">
+        <li class="text">32. Habitación 267 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="54-32-habitacin-268-huerto-2">
+        <li class="text">32. Habitación 268 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="55-32-habitacin-269-huerta-2">
+        <li class="text">32. Habitación 269 Huerta 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="56-32-habitacin-270-huerto-2">
+        <li class="text">32. Habitación 270 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="57-32-habitacin-271-huerto-2">
+        <li class="text">32. Habitación 271 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="58-32-habitacin-272-huerto-2">
+        <li class="text">32. Habitación 272 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="59-32-habitacin-335-huerto-2">
+        <li class="text">32. Habitación 335 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="60-32-habitacin-336-huerto-2">
+        <li class="text">32. Habitación 336 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="61-32-habitacin-337-huerto-2">
+        <li class="text">32. Habitación 337 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="62-32-habitacin-338-huerto-2">
+        <li class="text">32. Habitación 338 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="63-32-habitacin-339-huerto-2">
+        <li class="text">32. Habitación 339 Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="64-32-habitacin-340_341-huerto-1">
+        <li class="text">32. Habitación 340_341 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="65-32-habitaciones-huerto-2">
+        <li class="text">32. Habitaciones Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="66-32-huerto-2">
+        <li class="text">32. Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="67-32-patio-huerto-2">
+        <li class="text">32. Patio Huerto 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="68-30-escaleras-huerto-1">
+        <li class="text">30. Escaleras Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="69-30-exterior-huerto-11">
+        <li class="text">30. Exterior Huerto 1(1)</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="70-30-exterior-huerto-1">
+        <li class="text">30. Exterior Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="71-30-habitacin-115-huerto-1">
+        <li class="text">30. Habitación 115 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="72-30-habitacin-116-huerto-1">
+        <li class="text">30. Habitación 116 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="73-30-habitacin-117-huerto-1">
+        <li class="text">30. Habitación 117 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="74-30-habitacin-118-huerto-1">
+        <li class="text">30. Habitación 118 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="75-30-habitacin-119-huerto-1">
+        <li class="text">30. Habitación 119 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="76-30-habitacin-120-huerto-1">
+        <li class="text">30. Habitación 120 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="77-30-habitacin-121-huerto-1">
+        <li class="text">30. Habitación 121 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="78-30-habitacin-122-huerto-1">
+        <li class="text">30. Habitación 122 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="79-30-habitacin-123-huerto-1">
+        <li class="text">30. Habitación 123 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="80-30-habitacin-124-huerto-1">
+        <li class="text">30. Habitación 124 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="81-30-habitacin-125-huerto-1">
+        <li class="text">30. Habitación 125 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="82-30-habitacin-126-huerto-1">
+        <li class="text">30. Habitación 126 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="83-30-habitacin-255-huerto-1">
+        <li class="text">30. Habitación 255 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="84-30-habitacin-256-huerto-1">
+        <li class="text">30. Habitación 256 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="85-30-habitacin-257-huerto-1">
+        <li class="text">30. Habitación 257 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="86-30-habitacin-258-huerto-1">
+        <li class="text">30. Habitación 258 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="87-30-habitacin-259-huerto-1">
+        <li class="text">30. Habitación 259 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="88-30-habitacin-260-huerto-1">
+        <li class="text">30. Habitación 260 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="89-30-habitacin-261-huerto-1">
+        <li class="text">30. Habitación 261 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="90-30-habitacin-262-huerto-1">
+        <li class="text">30. Habitación 262 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="91-30-habitacin-263-huerto-1">
+        <li class="text">30. Habitación 263 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="92-30-habitacin-264-huerto-1">
+        <li class="text">30. Habitación 264 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="93-30-habitacin-265-huerto-1">
+        <li class="text">30. Habitación 265 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="94-30-habitacin-266-huerto-1">
+        <li class="text">30. Habitación 266 Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="95-30-habitaciones-huerto-1">
+        <li class="text">30. Habitaciones Huerto 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="96-31-jardn-caballerizas-evento-1">
+        <li class="text">31. Jardín Caballerizas, Evento 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="97-31-jardn-caballerizas-evento-2">
+        <li class="text">31. Jardín Caballerizas, Evento 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="98-31-jardn-caballerizas-evento-3">
+        <li class="text">31. Jardín Caballerizas, evento 3</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="99-31-jardn-caballerizas-evento-4">
+        <li class="text">31. Jardín Caballerizas, Evento 4</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="100-31-jardn-caballerizas-evento-5">
+        <li class="text">31. Jardín Caballerizas, Evento 5</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="101-31-jardn-caballerizas-evento_">
+        <li class="text">31. Jardín Caballerizas, Evento_</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="102-27-jardn-el-chacuaco">
+        <li class="text">27. Jardín el Chacuaco</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="103-34-explanada-del-chacuaco">
+        <li class="text">34. Explanada del Chacuaco</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="104-24-saln-troje-entrada">
+        <li class="text">24. Salón Troje, Entrada</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="105-29-capilla-2">
+        <li class="text">29. Capilla 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="106-29-capilla-3">
+        <li class="text">29. Capilla 3</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="107-9-jardn-de-la-fuente_">
+        <li class="text">9. Jardín de la Fuente</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="108-9-jardn-suits_">
+        <li class="text">9. Jardín Suits</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="109-9-salida-recepcin_">
+        <li class="text">9. Salida Recepción</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="110-14-pasillo-suites">
+        <li class="text">14. Pasillo Suites</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="111-10-suite-1">
+        <li class="text">10. Suite 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="112-10-suite-2">
+        <li class="text">10. Suite 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="113-14-suite-3">
+        <li class="text">14. Suite 3</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="114-14-suite-4">
+        <li class="text">14. Suite 4</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="115-14-suite-5">
+        <li class="text">14. Suite 5</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="116-14-suite-6">
+        <li class="text">14. Suite 6</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="117-14-suite-7">
+        <li class="text">14. Suite 7</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="118-14-suite-8">
+        <li class="text">14. Suite 8</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="119-14-suite-9">
+        <li class="text">14. Suite 9</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="120-13-biblioteca-1">
+        <li class="text">13. Biblioteca 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="121-13-biblioteca-2">
+        <li class="text">13. Biblioteca 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="122-13-biblioteca">
+        <li class="text">13. Biblioteca</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="123-12-saln-el-puente">
+        <li class="text">12. Salón El Puente</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="124-11-saln-la-fuente_">
+        <li class="text">11. Salón la Fuente</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="125-14-suites-escaleras">
+        <li class="text">14. Suites Escaleras</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="126-9-a-oficina-bodas">
+        <li class="text">9. A Oficina Bodas</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="127-21-oficina-de-bodas-y-eventos">
+        <li class="text">21. Oficina de Bodas y Eventos</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="128-19-bar-stelaris">
+        <li class="text">19. Bar Stelaris</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="129-18-starbucks">
+        <li class="text">18. Starbucks</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="130-20-el-baul">
+        <li class="text">20. El Baul</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="131-9-al-spa">
+        <li class="text">9. Al Spa</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="132-9-arbol">
+        <li class="text">9. Arbol</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="133-7-salon-belleza">
+        <li class="text">7. Salon Belleza</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="134-29-capilla-1">
+        <li class="text">29. Capilla 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="135-17-tunel">
+        <li class="text">17. Tunel</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="136-17-tunel-medio">
+        <li class="text">17. Tunel Medio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="137-40-jardin-pilares">
+        <li class="text">40. Jardin Pilares</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="138-17-tunel-baos">
+        <li class="text">17. Tunel Baños</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="139-22-escaleras-capilla-pilares">
+        <li class="text">22. Escaleras Capilla Pilares</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="140-40-jardin-pilares-2">
+        <li class="text">40. Jardin Pilares 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="141-17-tunel-centro">
+        <li class="text">17. Tunel Centro</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="142-23-entrada-saln-la-zafra_">
+        <li class="text">23. Entrada, Salón la Zafra</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="143-23-frente-saln-la-zafra_">
+        <li class="text">23. Frente, Salón la Zafra</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="144-23-saln-la-zafra_">
+        <li class="text">23. Salón la Zafra</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="145-39-carreta-evento">
+        <li class="text">39. Carreta Evento</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="146-24-saln-troje-1">
+        <li class="text">24. Salón Troje 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="147-24-saln-troje-3">
+        <li class="text">24. Salón Troje 3</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="148-24-saln-troje-2">
+        <li class="text">24. Salón Troje 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="149-24-saln-troje-montado">
+        <li class="text">24. Salón Troje Montado</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="150-38-alberca-bicentenario_">
+        <li class="text">38. Alberca Bicentenario</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="151-38-alberca-bicentenario-area-camastros_">
+        <li class="text">38. Alberca Bicentenario, Area Camastros</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="152-38-alberca-bicentenario-bancos_">
+        <li class="text">38. Alberca Bicentenario, Bancos</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="153-38-alberca-bicentenario-barra_">
+        <li class="text">38. Alberca Bicentenario, Barra</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="154-38-alberca-bicentenario-camastros-mrmol_">
+        <li class="text">38. Alberca Bicentenario, Camastros Mármol</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="155-38-alberca-bicentenario-camastros_">
+        <li class="text">38. Alberca Bicentenario, Camastros</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="156-38-alberca-bicentenario-camino-barra">
+        <li class="text">38. Alberca Bicentenario, Camino Barra</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="157-38-alberca-bicentenario-jacuzzi_">
+        <li class="text">38. Alberca Bicentenario, Jacuzzi</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="158-38-alberca-bicentenario-lado-barra_">
+        <li class="text">38. Alberca Bicentenario, Lado Barra</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="159-38-alberca-bicentenario-lado-bicentenario_">
+        <li class="text">38. Alberca Bicentenario, lado Bicentenario</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="160-38-alberca-bicentenario-lado-camastros_">
+        <li class="text">38. Alberca Bicentenario, lado Camastros</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="161-38-alberca-bicentenario-puente_">
+        <li class="text">38. Alberca Bicentenario, Puente</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="162-3-jardn-el-pochote">
+        <li class="text">3. Jardín el Pochote</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="163-3-jardn-el-pochote_rio">
+        <li class="text">3. Jardín el Pochote_Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="164-3-jardn-el-pochote-evento-2">
+        <li class="text">3. Jardín el Pochote Evento 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="165-3-jardn-el-pochote-evento-4">
+        <li class="text">3. Jardín el Pochote, Evento 4</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="166-3-jardn-el-pochote-evento-1">
+        <li class="text">3. Jardín el Pochote, Evento 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="167-3-jardn-el-pochote-evento-3">
+        <li class="text">3. Jardín el Pochote, Evento 3</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="168-2-entrada-gym">
+        <li class="text">2. Entrada Gym</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="169-1-saln-bicentenario-entrada">
+        <li class="text">1. Salón Bicentenario, Entrada</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="170-2-gym-correr">
+        <li class="text">2. Gym, Correr</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="171-2-gym-pasillo">
+        <li class="text">2. Gym, Pasillo</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="172-2-gym-pesas">
+        <li class="text">2. Gym, Pesas</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="173-1-saln-bicentenario-sala-espejo_">
+        <li class="text">1. Salón Bicentenario, Sala Espejo</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="174-1-saln-bicentenario-entrada-escaleras_">
+        <li class="text">1. Salón Bicentenario, Entrada Escaleras</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="175-1-saln-bicentenario-exterior">
+        <li class="text">1. Salón Bicentenario, Exterior</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="176-1-saln-bicentenario-medio">
+        <li class="text">1. Salón Bicentenario, Medio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="177-1-saln-bicentenario-interior">
+        <li class="text">1. Salón Bicentenario Interior</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="178-22-escaleras-capilla-lado-derecho">
+        <li class="text">22. Escaleras Capilla lado Derecho</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="179-22-escaleras-capilla-lado-izquierdo_">
+        <li class="text">22. Escaleras Capilla lado izquierdo</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="180-22-habitacin-221-capilla">
+        <li class="text">22. Habitación 221 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="181-22-habitacin-222-capilla">
+        <li class="text">22. Habitación 222 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="182-22-habitacin-223-capilla">
+        <li class="text">22. Habitación 223 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="183-22-habitacin-224-capilla">
+        <li class="text">22. Habitación 224 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="184-22-habitacin-225-capilla">
+        <li class="text">22. Habitación 225 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="185-22-habitacin-226-capilla">
+        <li class="text">22. Habitación 226 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="186-22-habitacin-227-capilla">
+        <li class="text">22. Habitación 227 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="187-22-habitacin-228-capilla">
+        <li class="text">22. Habitación 228 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="188-22-habitacin-229-capilla">
+        <li class="text">22. Habitación 229 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="189-22-habitacin-230-capilla">
+        <li class="text">22. Habitación 230 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="190-22-habitacin-231-capilla">
+        <li class="text">22. Habitación 231 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="191-22-habitacin-232-capilla">
+        <li class="text">22. Habitación 232 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="192-22-habitacin-233-capilla">
+        <li class="text">22. Habitación 233 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="193-22-habitacin-234-capilla">
+        <li class="text">22. Habitación 234 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="194-22-habitacin-235-capilla">
+        <li class="text">22. Habitación 235 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="195-22-habitacin-236-capilla">
+        <li class="text">22. Habitación 236 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="196-22-habitacin-237-capilla">
+        <li class="text">22. Habitación 237 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="197-22-habitacin-238-capilla">
+        <li class="text">22. Habitación 238 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="198-22-habitacin-239-capilla">
+        <li class="text">22. Habitación 239 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="199-22-habitacin-240-capilla">
+        <li class="text">22. Habitación 240 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="200-22-habitacin-241-capilla">
+        <li class="text">22. Habitación 241 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="201-22-habitacin-242-capilla">
+        <li class="text">22. Habitación 242 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="202-22-habitacin-243-capilla">
+        <li class="text">22. Habitación 243 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="203-22-habitacin-244-capilla">
+        <li class="text">22. Habitación 244 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="204-22-habitacin-321-capilla">
+        <li class="text">22. Habitación 321 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="205-22-habitacin-322-capilla">
+        <li class="text">22. Habitación 322 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="206-22-habitacin-323-capilla">
+        <li class="text">22. Habitación 323 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="207-22-habitacin-324-capilla">
+        <li class="text">22. Habitación 324 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="208-22-habitacin-325-capilla">
+        <li class="text">22. Habitación 325 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="209-22-habitacin-326-capilla">
+        <li class="text">22. Habitación 326 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="210-22-habitacin-328-capilla">
+        <li class="text">22. Habitación 328 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="211-22-habitacin-329-capilla">
+        <li class="text">22. Habitación 329 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="212-22-habitacin-330-capilla">
+        <li class="text">22. Habitación 330 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="213-22-habitacin-331-capilla_">
+        <li class="text">22. Habitación 331 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="214-22-habitacin-332-capilla">
+        <li class="text">22. Habitación 332 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="215-22-habitacin-333-capilla">
+        <li class="text">22. Habitación 333 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="216-22-habitacin-334-capilla">
+        <li class="text">22. Habitación 334 Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="217-22-habitaciones-capilla">
+        <li class="text">22. Habitaciones Capilla</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="218-16-escaleras-terraza-el-chacuaco_">
+        <li class="text">16. Escaleras, Terraza el Chacuaco</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="219-16-entrada-terraza-el-chacuaco_">
+        <li class="text">16. Entrada, Terraza el Chacuaco</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="220-25-saln-caaberales">
+        <li class="text">25. Salón Cañaberales</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="221-16-pasillo-terraza-el-chacuaco_">
+        <li class="text">16. Pasillo, Terraza el Chacuaco</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="222-16-terraza-el-chacuaco_">
+        <li class="text">16. Terraza el Chacuaco</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="223-16-montado-terraza-el-chacuaco_">
+        <li class="text">16. Montado, Terraza el Chacuaco</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="224-16-salida-terraza-el-chacuaco_">
+        <li class="text">16. Salida, Terraza el Chacuaco</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="225-16-bar-gavilanes_">
+        <li class="text">16. Bar Gavilanes</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="226-7-salon-belleza-1">
+        <li class="text">7. Salon Belleza 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="227-25-saln-1-caaverales_">
+        <li class="text">25. Salón 1 Cañaverales</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="228-25-interior-1-caaverales_">
+        <li class="text">25. Interior 1 Cañaverales</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="229-25-saln-2_3_4_5-caaverales_">
+        <li class="text">25. Salón 2, 3, 4, 5 Cañaverales</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="230-25-interior-2-caaveral_">
+        <li class="text">25. Interior 2 Cañaveral</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="231-25-interior-5-caaveral_">
+        <li class="text">25. Interior 5 Cañaveral</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="232-25-interior-3_4-caaveral_">
+        <li class="text">25. Interior 3_4 Cañaveral</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="233-25-interior-3_4-caaverales_">
+        <li class="text">25. Interior 3_4 Cañaverales</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="234-3-jardn-del-pochote-escalera">
+        <li class="text">3. Jardín del Pochote, Escalera</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="235-6-tnel-de-noria">
+        <li class="text">6. Túnel de Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="236-6-tnel-noria">
+        <li class="text">6. Túnel Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="237-6-habitacin-245-noria">
+        <li class="text">6. Habitación 245 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="238-6-habitacin-246-noria">
+        <li class="text">6. Habitación 246 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="239-6-habitacin-247-noria">
+        <li class="text">6. Habitación 247 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="240-6-habitacin-248-noria">
+        <li class="text">6. Habitación 248 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="241-6-habitacin-249-noria">
+        <li class="text">6. Habitación 249 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="242-6-habitacin-250-noria">
+        <li class="text">6. Habitación 250 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="243-6-habitacin-251-noria">
+        <li class="text">6. Habitación 251 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="244-6-habitacin-252-noria">
+        <li class="text">6. Habitación 252 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="245-6-habitacin-253-noria">
+        <li class="text">6. Habitación 253 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="246-6-habitacin-254-noria">
+        <li class="text">6. Habitación 254 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="247-6-habitacin-114-noria">
+        <li class="text">6. Habitación 114 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="248-6-habitacin-112-noria">
+        <li class="text">6. Habitación 112 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="249-6-habitacion-111-noria">
+        <li class="text">6. Habitacion 111 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="250-6-habitacin-110-noria">
+        <li class="text">6. Habitación 110 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="251-6-habitacin-109-noria">
+        <li class="text">6. Habitación 109 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="252-6-habitacin-108-noria">
+        <li class="text">6. Habitación 108 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="253-6-habitacin-107-noria">
+        <li class="text">6. Habitación 107 Noria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="254-5-jardn-del-hule">
+        <li class="text">5. Jardín del Hule</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="255-5-jardin-del-hule">
+        <li class="text">5. Jardin del Hule</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="256-35-spa-entrada">
+        <li class="text">35. Spa Entrada</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="257-8-el-trapiche-entrada">
+        <li class="text">8. El Trapiche, Entrada</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="258-8-el-trapiche-escaleras">
+        <li class="text">8. El Trapiche, Escaleras</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="259-8-el-trapiche-zona-1">
+        <li class="text">8. El Trapiche, Zona 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="260-8-el-trapiche-zona-2">
+        <li class="text">8. El Trapiche, Zona 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="261-4-habitacin-101-rio">
+        <li class="text">4. Habitación 101 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="262-4-habitacin-102-rio">
+        <li class="text">4. Habitación 102 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="263-4-habitacin-103-rio">
+        <li class="text">4. Habitación 103 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="264-4-habitacin-ro-sala">
+        <li class="text">4. Habitación Río sala</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="265-4-habitaciones-ro-escaleras_">
+        <li class="text">4. Habitaciones Río Escaleras</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="266-4-habitaciones-ro-parte-trasera_">
+        <li class="text">4. Habitaciones Río Parte Trasera</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="267-4-habitacin-104-rio">
+        <li class="text">4. Habitación 104 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="268-4-habitacin-105-rio">
+        <li class="text">4. Habitación 105 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="269-4-habitacin-106-rio">
+        <li class="text">4. Habitación 106 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="270-4-habitacin-202-rio">
+        <li class="text">4. Habitación 202 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="271-4-habitacin-203-rio">
+        <li class="text">4. Habitación 203 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="272-4-habitacin-204-rio">
+        <li class="text">4. Habitación 204 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="273-4-habitacin-205-rio">
+        <li class="text">4. Habitación 205 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="274-4-habitacin-206-rio">
+        <li class="text">4. Habitación 206 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="275-4-habitacin-207-rio">
+        <li class="text">4. Habitación 207 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="276-4-habitacin-208-rio">
+        <li class="text">4. Habitación 208 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="277-4-habitacin-209-rio">
+        <li class="text">4. Habitación 209 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="278-4-habitacin-210-rio">
+        <li class="text">4. Habitación 210 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="279-4-habitacin-211-rio">
+        <li class="text">4. Habitación 211 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="280-4-habitacin-212-rio">
+        <li class="text">4. Habitación 212 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="281-4-habitacin-214-rio">
+        <li class="text">4. Habitación 214 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="282-4-habitacin-215-rio">
+        <li class="text">4. Habitación 215 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="283-4-habitacin-216-rio">
+        <li class="text">4. Habitación 216 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="284-4-habitacin-217-rio">
+        <li class="text">4. Habitación 217 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="285-4-habitacin-218-rio">
+        <li class="text">4. Habitación 218 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="286-4-habitacin-219-rio">
+        <li class="text">4. Habitación 219 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="287-4-habitacin-220-rio">
+        <li class="text">4. Habitación 220 Rio</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="288-35-spa-espejos-hombres">
+        <li class="text">35. Spa Espejos Hombres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="289-35-spa-hombres">
+        <li class="text">35. Spa Hombres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="290-35-spa-lavamanos-hombres">
+        <li class="text">35. Spa Lavamanos Hombres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="291-35-spa-lavamanos_vestidores-mujeres">
+        <li class="text">35. Spa Lavamanos_vestidores Mujeres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="292-35-spa-mujeres">
+        <li class="text">35. Spa Mujeres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="293-35-spa-piso-mujeres">
+        <li class="text">35. Spa Piso Mujeres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="294-35-spa-piso-hombres">
+        <li class="text">35. Spa Piso Hombres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="295-35-spa-recepcin">
+        <li class="text">35. Spa Recepción</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="296-35-spa-sauna-hombres">
+        <li class="text">35. Spa Sauna Hombres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="297-35-spa-sauna-mujeres">
+        <li class="text">35. Spa Sauna Mujeres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="298-35-spa-vestidores-hombres">
+        <li class="text">35. Spa Vestidores Hombres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="299-35-jardn-spa">
+        <li class="text">35. Jardín Spa</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="300-35-patio-spa">
+        <li class="text">35. Patio Spa</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="301-35-spa-baera-hombres">
+        <li class="text">35. Spa Bañera Hombres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="302-35-spa-baera-mujeres-1">
+        <li class="text">35. Spa Bañera Mujeres 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="303-35-spa-baera-mujeres">
+        <li class="text">35. Spa Bañera Mujeres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="304-35-spa-baos-hombres">
+        <li class="text">35. Spa Baños Hombres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="305-35-spa-baos-mujeres">
+        <li class="text">35. Spa Baños Mujeres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="306-35-spa-ducha-libre-hombres">
+        <li class="text">35. Spa Ducha Libre Hombres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="307-35-spa-ducha-libre-mujeres">
+        <li class="text">35. Spa Ducha Libre Mujeres</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="308-35-spa-duchas-hombres">
+        <li class="text">35. Spa Duchas Hombres</li>
+      </a>
+    
+  </ul>
+</div>
+
+<a href="javascript:void(0)" id="autorotateToggle">
+  <img class="icon off" src="img/play.png">
+  <img class="icon on" src="img/pause.png">
+</a>
+
+<a href="javascript:void(0)" id="fullscreenToggle">
+  <img class="icon off" src="img/fullscreen.png">
+  <img class="icon on" src="img/windowed.png">
+</a>
+
+<a href="javascript:void(0)" id="sceneListToggle">
+  <img class="icon off" src="img/expand.png">
+  <img class="icon on" src="img/collapse.png">
+</a>
+
+<a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
+  <img class="icon" src="img/up.png">
+</a>
+<a href="javascript:void(0)" id="viewDown" class="viewControlButton viewControlButton-2">
+  <img class="icon" src="img/down.png">
+</a>
+<a href="javascript:void(0)" id="viewLeft" class="viewControlButton viewControlButton-3">
+  <img class="icon" src="img/left.png">
+</a>
+<a href="javascript:void(0)" id="viewRight" class="viewControlButton viewControlButton-4">
+  <img class="icon" src="img/right.png">
+</a>
+<a href="javascript:void(0)" id="viewIn" class="viewControlButton viewControlButton-5">
+  <img class="icon" src="img/plus.png">
+</a>
+<a href="javascript:void(0)" id="viewOut" class="viewControlButton viewControlButton-6">
+  <img class="icon" src="img/minus.png">
+</a>
+
+<script src="vendor/screenfull.min.js" ></script>
+<script src="vendor/bowser.min.js" ></script>
+<script src="vendor/marzipano.js" ></script>
+
+<script src="data.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
