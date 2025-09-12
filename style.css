@@ -44,7 +44,7 @@
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-  max-width: 90px;
+  max-width: 900px;
   width: 90vw;
   max-height: 90vh;
   overflow: auto;
@@ -222,18 +222,18 @@ body.fullscreen-enabled.mobile #titleBar {
 
 /* If there are multiple scenes the title bar must make space for the scene list toggle */
 body.multiple-scenes #titleBar {
-  left: 70px; /* Increased spacing to avoid overlap */
+  left: 70px;
 }
 
 body.multiple-scenes.mobile #titleBar {
-  left: 80px; /* Increased spacing for mobile */
+  left: 80px;
 }
 
 #titleBar .sceneName {
   width: 100%;
   height: 100%;
   line-height: 30px;
-  padding: 5px;
+  padding: 50px;
   background-color: rgb(58,68,84);
   background-color: rgba(58,68,84,0.8);
   overflow: hidden;
@@ -359,16 +359,16 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   position: absolute;
   top: 100;
   left: 0;
-  width: 60px; /* Increased width */
-  height: 60px; /* Increased height */
+  width: 60px;
+  height: 60px;
   padding: 5px;
   background-color: rgb(103,115,131);
   background-color: rgba(103,115,131,0.8);
 }
 
 .mobile #sceneListToggle {
-  width: 70px; /* Increased width for mobile */
-  height: 70px; /* Increased height for mobile */
+  width: 70px;
+  height: 70px;
 }
 
 #sceneListToggle .text {
@@ -759,6 +759,7 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   overflow-y: auto;
+  visibility: hidden;
   /* rotate(90deg) causes transition flicker on Firefox 58 */
   -ms-transform: perspective(200px) rotateX(-89.999deg);
   -webkit-transform: perspective(200px) rotateX(-89.999deg);
@@ -996,11 +997,11 @@ body.fullscreen-enabled.mobile #titleBar {
 
 /* If there are multiple scenes the title bar must make space for the scene list toggle */
 body.multiple-scenes #titleBar {
-  left: 70px; /* Increased spacing to avoid overlap */
+  left: 40px;
 }
 
 body.multiple-scenes.mobile #titleBar {
-  left: 80px; /* Increased spacing for mobile */
+  left: 50px;
 }
 
 #titleBar .sceneName {
@@ -1129,20 +1130,20 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   display: none;
 }
 
-#sceneListToggle {
+#sceneListToggle { /* Marzipano lista izquirda edit */
   position: absolute;
   top: 0;
   left: 0;
-  width: 60px; /* Increased width */
-  height: 60px; /* Increased height */
-  padding: 5px;
+  width: 100px;
+  height: 100px;
+  padding: 50px;
   background-color: rgb(103,115,131);
   background-color: rgba(103,115,131,0.8);
 }
 
 .mobile #sceneListToggle {
-  width: 70px; /* Increased width for mobile */
-  height: 70px; /* Increased height for mobile */
+  width: 50px;
+  height: 50px;
 }
 
 #sceneListToggle .text {
@@ -1153,12 +1154,12 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   line-height: 30px;
 }
 
-#sceneListToggle .icon {
+#sceneListToggle .icon { /* Marzipano scene list iconito edit */
   position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 30px;
-  height: 30px;
+  top: 20px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
 }
 
 .mobile #sceneListToggle .icon {
@@ -1186,7 +1187,7 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   position: absolute;
   top: 0;
   left: -220px;
-  padding-top: 35px;
+  padding-top: 100px; /* Marzipano list left menu edit */
   width: 220px;
   max-height: 100%;
   overflow-x: hidden;
@@ -1227,7 +1228,7 @@ body.fullscreen-enabled.mobile #autorotateToggle {
 #sceneList .scene {
   display: block;
   width: 100%;
-  height: 30px;
+  height: 60px;
 }
 
 .mobile #sceneList .scene {
@@ -1533,6 +1534,7 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   overflow-y: auto;
+  visibility: hidden;
   /* rotate(90deg) causes transition flicker on Firefox 58 */
   -ms-transform: perspective(200px) rotateX(-89.999deg);
   -webkit-transform: perspective(200px) rotateX(-89.999deg);
@@ -1771,7 +1773,7 @@ body.view-control-buttons .viewControlButton {
   box-shadow: -2px 0 10px rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
-  padding: 0;
+  padding: 100px 0 24px 0;
 }
 .custom-menu.open {
   right: 0;
@@ -1822,10 +1824,10 @@ body.view-control-buttons .viewControlButton {
 /* Botón hamburguesa */
 .custom-menu-toggle {
   position: fixed;
-  top: 70px;
-  right: 28px;
-  width: 60px; /* Increased width */
-  height: 60px; /* Increased height */
+  top: 0px;
+  right: 7px;
+  width: 70px; /* Increased width */
+  height: 70px; /* Increased height */
   background: rgba(255,255,255,0.92);
   border: none;
   border-radius: 8px;
@@ -1850,8 +1852,8 @@ body.view-control-buttons .viewControlButton {
 /* Zona de título superior izquierda */
 .custom-title-bar {
   position: fixed;
-  top: 32px;
-  left: 60px;
+  top: 60px;
+  left: 32px;
   z-index: 1001;
   display: flex;
   flex-direction: column;
@@ -1864,7 +1866,7 @@ body.view-control-buttons .viewControlButton {
   font-size: 2em;
   font-weight: 600;
   padding: 8px 2px 8px 8px;
-  border-radius: 4px 4px 0 0;
+  border-radius: 40px 40px 40px 40px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   letter-spacing: 2px;
 }
@@ -1875,7 +1877,7 @@ body.view-control-buttons .viewControlButton {
   font-size: 1.35em;
   font-weight: 700;
   padding: 6px 28px 6px 18px;
-  border-radius: 0 0 4px 4px;
+  border-radius: 40px 40px 4px 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   margin-top: -2px;
   letter-spacing: 1px;
