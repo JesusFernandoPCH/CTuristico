@@ -1763,8 +1763,8 @@ body.view-control-buttons .viewControlButton {
 .custom-menu {
   position: fixed;
   top: 0;
-  right: -350px;
-  width: 320px;
+  right: -600px;
+  width: 250px;
   height: 100%;
   background: rgba(30, 30, 30, 0.92);
   color: #fff;
@@ -1773,7 +1773,7 @@ body.view-control-buttons .viewControlButton {
   box-shadow: -2px 0 10px rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
-  padding: 100px 0 24px 0;
+  padding: 0;
 }
 .custom-menu.open {
   right: 0;
@@ -1852,8 +1852,8 @@ body.view-control-buttons .viewControlButton {
 /* Zona de título superior izquierda */
 .custom-title-bar {
   position: fixed;
-  top: 60px;
-  left: 32px;
+  top: 10px;
+  left: 100px;
   z-index: 1001;
   display: flex;
   flex-direction: column;
@@ -1877,7 +1877,7 @@ body.view-control-buttons .viewControlButton {
   font-size: 1.35em;
   font-weight: 700;
   padding: 6px 28px 6px 18px;
-  border-radius: 40px 40px 4px 4px;
+  border-radius: 40px 40px 40px 40px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   margin-top: -2px;
   letter-spacing: 1px;
