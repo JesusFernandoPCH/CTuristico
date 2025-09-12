@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var ubicacionBtn = document.getElementById('ubicacionBtn');
   var ubicacionModal = document.getElementById('ubicacionModal');
   var ubicacionClose = document.getElementById('ubicacionClose');
-  var ubicacionBg = ubicacionModal ? ubicacionModal.querySelector('.info-tour-modal-bg') : null;
+  var ubicacionBg = ubicacionModal ? ubicacionModal.querySelector('.ubicacion-modal-bg') : null; // Updated class
   if (ubicacionBtn && ubicacionModal && ubicacionClose && ubicacionBg) {
     var modalOpen = false;
     function openModal() {
@@ -532,9 +532,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return null;
   }
 
-  // ...existing code...
-
-// --- Menú lateral personalizado ---
+  // --- Menú lateral personalizado ---
 const customMenu = document.getElementById('customMenu');
 const customMenuToggle = document.getElementById('customMenuToggle');
 
