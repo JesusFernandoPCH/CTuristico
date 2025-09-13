@@ -42,22 +42,22 @@
 .info-tour-modal-content {
   position: relative;
   background: #fff;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
   max-width: 900px;
-  width: 90vw;
-  max-height: 90vh;
+  width: 75vw;
+  max-height: 75vh;
   overflow: auto;
   z-index: 1;
   padding: 0;
 }
 .info-tour-modal-close {
   position: absolute;
-  top: 24px;
-  right: 32px;
+  top: -20px;
+  right: 10px;
   background: none;
   border: none;
-  font-size: 2.5em;
+  font-size: 5em;
   color: #ff8200;
   font-weight: bold;
   cursor: pointer;
@@ -150,7 +150,7 @@
     height: 180px;
   }
   .info-tour-modal-text {
-    padding: 24px 16px 24px 16px;
+    padding: 70px 30px 50px 30px;
   }
 }
 * {
