@@ -40,7 +40,7 @@ var APP_DATA = {
     },
     {
       "id": "1-28-entrada-explanada",
-      "name": "28. Entrada Explanada",
+      "name": "28. Explanada",
       "levels": [
         {
           "tileSize": 256,
@@ -90,7 +90,7 @@ var APP_DATA = {
     },
     {
       "id": "2-28-explanada-lado-la-distral",
-      "name": "28. Explanada lado La Distral",
+      "name": "28. Explanada",
       "levels": [
         {
           "tileSize": 256,
@@ -152,7 +152,7 @@ var APP_DATA = {
     },
     {
       "id": "3-28-explanada-lado-recepcin",
-      "name": "28. Explanada Lado Recepción",
+      "name": "28. Explanada",
       "levels": [
         {
           "tileSize": 256,
@@ -208,7 +208,7 @@ var APP_DATA = {
     },
     {
       "id": "4-28-explanada-para-huerto",
-      "name": "28. Explanada para Huerto",
+      "name": "28. Explanada",
       "levels": [
         {
           "tileSize": 256,
@@ -376,7 +376,7 @@ var APP_DATA = {
     },
     {
       "id": "7-26-la-distral-caja_",
-      "name": "26. La Distral, Caja",
+      "name": "26. La Distral",
       "levels": [
         {
           "tileSize": 256,
@@ -414,7 +414,7 @@ var APP_DATA = {
     },
     {
       "id": "8-26-la-distral-canino-explanada_",
-      "name": "26. La Distral, Canino Explanada",
+      "name": "26. La Distral",
       "levels": [
         {
           "tileSize": 256,
@@ -470,7 +470,7 @@ var APP_DATA = {
     },
     {
       "id": "9-26-la-distral-entrada_",
-      "name": "26. La Distral, Entrada",
+      "name": "26. La Distral",
       "levels": [
         {
           "tileSize": 256,
@@ -520,7 +520,7 @@ var APP_DATA = {
     },
     {
       "id": "10-26-la-distral-estufa_",
-      "name": "26. La Distral, Estufa",
+      "name": "26. La Distral, Huevera",
       "levels": [
         {
           "tileSize": 256,
@@ -570,7 +570,7 @@ var APP_DATA = {
     },
     {
       "id": "11-26-la-distral-madera-1_",
-      "name": "26. La Distral, Madera 1",
+      "name": "26. La Distral, Madera",
       "levels": [
         {
           "tileSize": 256,
@@ -632,7 +632,7 @@ var APP_DATA = {
     },
     {
       "id": "12-26-la-distral-mrmol-entrada_",
-      "name": "26. La Distral, Mármol Entrada",
+      "name": "26. La Distral, Mármol",
       "levels": [
         {
           "tileSize": 256,
@@ -688,7 +688,7 @@ var APP_DATA = {
     },
     {
       "id": "13-26-la-distral-mrmol-vinos_",
-      "name": "26. La Distral, Mármol Vinos",
+      "name": "26. La Distral, Mármol",
       "levels": [
         {
           "tileSize": 256,
@@ -782,7 +782,7 @@ var APP_DATA = {
     },
     {
       "id": "15-26-la-distral-parrilla-en-uso",
-      "name": "26. La Distral, Parrilla en Uso",
+      "name": "26. La Distral, Horno Pizzero",
       "levels": [
         {
           "tileSize": 256,
@@ -813,7 +813,7 @@ var APP_DATA = {
     },
     {
       "id": "16-26-la-distral-parrilla_",
-      "name": "26. La Distral, Parrilla",
+      "name": "26. La Distral, Horno Pizzero",
       "levels": [
         {
           "tileSize": 256,
@@ -857,7 +857,7 @@ var APP_DATA = {
     },
     {
       "id": "17-26-la-distral-puente-entrada_",
-      "name": "26. La Distral, Puente Entrada",
+      "name": "26. La Distral, Puente",
       "levels": [
         {
           "tileSize": 256,
@@ -901,7 +901,7 @@ var APP_DATA = {
     },
     {
       "id": "18-26-la-distral-puente-salida_",
-      "name": "26. La Distral, Puente Salida",
+      "name": "26. La Distral, Puente",
       "levels": [
         {
           "tileSize": 256,
@@ -957,7 +957,7 @@ var APP_DATA = {
     },
     {
       "id": "19-26-la-distral-terraza-madera_1",
-      "name": "26. La Distral, Terraza Madera 1",
+      "name": "26. La Distral, Terraza Madera",
       "levels": [
         {
           "tileSize": 256,
@@ -1095,7 +1095,7 @@ var APP_DATA = {
     },
     {
       "id": "22-26-la-distral-zona-buffet_",
-      "name": "26. La Distral, Zona Buffet",
+      "name": "26. La Distral, Buffet",
       "levels": [
         {
           "tileSize": 256,
@@ -1157,7 +1157,7 @@ var APP_DATA = {
     },
     {
       "id": "23-33-jardn-del-lago-camino-aledao_",
-      "name": "33. Jardín del Lago, Camino Aledaño",
+      "name": "33. Jardín del Lago",
       "levels": [
         {
           "tileSize": 256,
@@ -1213,7 +1213,7 @@ var APP_DATA = {
     },
     {
       "id": "24-33-jardn-del-lago-columpio_",
-      "name": "33. Jardín del Lago, columpio",
+      "name": "33. Jardín del Lago",
       "levels": [
         {
           "tileSize": 256,
@@ -1263,7 +1263,7 @@ var APP_DATA = {
     },
     {
       "id": "25-33-jardn-del-lago-este_",
-      "name": "33. Jardín del Lago, Este",
+      "name": "33. Jardín del Lago",
       "levels": [
         {
           "tileSize": 256,
@@ -1325,7 +1325,7 @@ var APP_DATA = {
     },
     {
       "id": "26-33-jardn-del-lago-lado-noreste_",
-      "name": "33. Jardín del Lago, Lado Noreste",
+      "name": "33. Jardín del Lago",
       "levels": [
         {
           "tileSize": 256,
@@ -1369,7 +1369,7 @@ var APP_DATA = {
     },
     {
       "id": "27-33-jardn-del-lago-lado-oeste",
-      "name": "33. Jardín del lago, Lado Oeste",
+      "name": "33. Jardín del lago",
       "levels": [
         {
           "tileSize": 256,
@@ -1400,7 +1400,7 @@ var APP_DATA = {
     },
     {
       "id": "28-33-jardn-del-lago-lado-sur",
-      "name": "33. Jardín del Lago, Lado Sur",
+      "name": "33. Jardín del Lago",
       "levels": [
         {
           "tileSize": 256,
@@ -1431,7 +1431,7 @@ var APP_DATA = {
     },
     {
       "id": "29-33-jardn-del-lago-lado-suroeste_",
-      "name": "33. Jardín del Lago, Lado SurOeste",
+      "name": "33. Jardín del Lago",
       "levels": [
         {
           "tileSize": 256,
@@ -1487,7 +1487,7 @@ var APP_DATA = {
     },
     {
       "id": "30-33-jardn-del-lago-puente_",
-      "name": "33. Jardín del Lago, Puente",
+      "name": "33. Jardín del Lago",
       "levels": [
         {
           "tileSize": 256,
@@ -1543,7 +1543,7 @@ var APP_DATA = {
     },
     {
       "id": "31-33-jardn-del-lago-red-de-voleibol_",
-      "name": "33. Jardín del lago, Red de Voleibol",
+      "name": "33. Jardín del lago",
       "levels": [
         {
           "tileSize": 256,
@@ -1593,7 +1593,7 @@ var APP_DATA = {
     },
     {
       "id": "32-33-jardn-del-lago-sendero-oeste_1",
-      "name": "33. Jardín del Lago, Sendero Oeste 1",
+      "name": "33. Jardín del Lago",
       "levels": [
         {
           "tileSize": 256,
@@ -1643,7 +1643,7 @@ var APP_DATA = {
     },
     {
       "id": "33-33-jardn-del-lago-sendero-oeste_",
-      "name": "33. Jardín del Lago, Sendero Oeste",
+      "name": "33. Jardín del Lago",
       "levels": [
         {
           "tileSize": 256,
@@ -1699,7 +1699,7 @@ var APP_DATA = {
     },
     {
       "id": "34-33-jardn-del-lago-villas_",
-      "name": "33. Jardín del Lago, Villas",
+      "name": "33. Jardín del Lago",
       "levels": [
         {
           "tileSize": 256,
@@ -2037,7 +2037,7 @@ var APP_DATA = {
     },
     {
       "id": "41-37-segunda-alberca-1",
-      "name": "37. Segunda alberca 1",
+      "name": "37. Alberca Villas",
       "levels": [
         {
           "tileSize": 256,
@@ -2099,7 +2099,7 @@ var APP_DATA = {
     },
     {
       "id": "42-37-segunda-alberca-2",
-      "name": "37. Segunda alberca 2",
+      "name": "37. Alberca Villas",
       "levels": [
         {
           "tileSize": 256,
@@ -2149,7 +2149,7 @@ var APP_DATA = {
     },
     {
       "id": "43-37-segunda-alberca-3",
-      "name": "37. Segunda alberca 3",
+      "name": "37. Alberca Villas",
       "levels": [
         {
           "tileSize": 256,
@@ -2199,7 +2199,7 @@ var APP_DATA = {
     },
     {
       "id": "44-37-segunda-alberca-4",
-      "name": "37. Segunda alberca 4",
+      "name": "37. Alberca Villas",
       "levels": [
         {
           "tileSize": 256,
@@ -2255,7 +2255,7 @@ var APP_DATA = {
     },
     {
       "id": "45-37-segunda-alberca-5",
-      "name": "37. Segunda alberca 5",
+      "name": "37. Alberca Villas",
       "levels": [
         {
           "tileSize": 256,
@@ -2311,7 +2311,7 @@ var APP_DATA = {
     },
     {
       "id": "46-37-segunda-alberca-6",
-      "name": "37. Segunda alberca 6",
+      "name": "37. Alberca Villas",
       "levels": [
         {
           "tileSize": 256,
@@ -2373,7 +2373,7 @@ var APP_DATA = {
     },
     {
       "id": "47-37-segunda-alberca-baos_",
-      "name": "37. Segunda alberca Baños",
+      "name": "37. Alberca Villas",
       "levels": [
         {
           "tileSize": 256,
@@ -4738,7 +4738,7 @@ var APP_DATA = {
     },
     {
       "id": "96-31-jardn-caballerizas-evento-1",
-      "name": "31. Jardín Caballerizas, Evento 1",
+      "name": "31. Jardín Caballerizas",
       "levels": [
         {
           "tileSize": 256,
@@ -4788,7 +4788,7 @@ var APP_DATA = {
     },
     {
       "id": "97-31-jardn-caballerizas-evento-2",
-      "name": "31. Jardín Caballerizas, Evento 2",
+      "name": "31. Jardín Caballerizas",
       "levels": [
         {
           "tileSize": 256,
@@ -4844,7 +4844,7 @@ var APP_DATA = {
     },
     {
       "id": "98-31-jardn-caballerizas-evento-3",
-      "name": "31. Jardín Caballerizas, evento 3",
+      "name": "31. Jardín Caballerizas",
       "levels": [
         {
           "tileSize": 256,
@@ -4912,7 +4912,7 @@ var APP_DATA = {
     },
     {
       "id": "99-31-jardn-caballerizas-evento-4",
-      "name": "31. Jardín Caballerizas, Evento 4",
+      "name": "31. Jardín Caballerizas",
       "levels": [
         {
           "tileSize": 256,
@@ -4962,7 +4962,7 @@ var APP_DATA = {
     },
     {
       "id": "100-31-jardn-caballerizas-evento-5",
-      "name": "31. Jardín Caballerizas, Evento 5",
+      "name": "31. Jardín Caballerizas",
       "levels": [
         {
           "tileSize": 256,
@@ -5018,7 +5018,7 @@ var APP_DATA = {
     },
     {
       "id": "101-31-jardn-caballerizas-evento_",
-      "name": "31. Jardín Caballerizas, Evento_",
+      "name": "31. Jardín Caballerizas",
       "levels": [
         {
           "tileSize": 256,
@@ -5074,7 +5074,7 @@ var APP_DATA = {
     },
     {
       "id": "102-27-jardn-el-chacuaco",
-      "name": "27. Jardín el Chacuaco",
+      "name": "27. Jardín Del Chacuaco",
       "levels": [
         {
           "tileSize": 256,
@@ -5124,7 +5124,7 @@ var APP_DATA = {
     },
     {
       "id": "103-34-explanada-del-chacuaco",
-      "name": "34. Explanada del Chacuaco",
+      "name": "34. Explanada Del Chacuaco",
       "levels": [
         {
           "tileSize": 256,
@@ -5180,7 +5180,7 @@ var APP_DATA = {
     },
     {
       "id": "104-24-saln-troje-entrada",
-      "name": "24. Salón Troje, Entrada",
+      "name": "24. Salón Troje",
       "levels": [
         {
           "tileSize": 256,
@@ -5248,7 +5248,7 @@ var APP_DATA = {
     },
     {
       "id": "105-29-capilla-2",
-      "name": "29. Capilla 2",
+      "name": "29. Capilla",
       "levels": [
         {
           "tileSize": 256,
@@ -5298,7 +5298,7 @@ var APP_DATA = {
     },
     {
       "id": "106-29-capilla-3",
-      "name": "29. Capilla 3",
+      "name": "29. Capilla",
       "levels": [
         {
           "tileSize": 256,
@@ -5392,7 +5392,7 @@ var APP_DATA = {
     },
     {
       "id": "108-9-jardn-suits_",
-      "name": "9. Jardín Suits",
+      "name": "9. Jardín San Antonio",
       "levels": [
         {
           "tileSize": 256,
@@ -5436,7 +5436,7 @@ var APP_DATA = {
     },
     {
       "id": "109-9-salida-recepcin_",
-      "name": "9. Salida Recepción",
+      "name": "9. Recepción",
       "levels": [
         {
           "tileSize": 256,
@@ -6046,7 +6046,7 @@ var APP_DATA = {
     },
     {
       "id": "120-13-biblioteca-1",
-      "name": "13. Biblioteca 1",
+      "name": "13. Biblioteca",
       "levels": [
         {
           "tileSize": 256,
@@ -6090,7 +6090,7 @@ var APP_DATA = {
     },
     {
       "id": "121-13-biblioteca-2",
-      "name": "13. Biblioteca 2",
+      "name": "13. Biblioteca",
       "levels": [
         {
           "tileSize": 256,
@@ -6234,7 +6234,7 @@ var APP_DATA = {
     },
     {
       "id": "124-11-saln-la-fuente_",
-      "name": "11. Salón la Fuente",
+      "name": "11. Salón La Fuente",
       "levels": [
         {
           "tileSize": 256,
@@ -6328,7 +6328,7 @@ var APP_DATA = {
     },
     {
       "id": "126-9-a-oficina-bodas",
-      "name": "9. A Oficina Bodas",
+      "name": "9. Jardín Primavera",
       "levels": [
         {
           "tileSize": 256,
@@ -6472,7 +6472,7 @@ var APP_DATA = {
     },
     {
       "id": "129-18-starbucks",
-      "name": "18. Starbucks",
+      "name": "18. Café",
       "levels": [
         {
           "tileSize": 256,
@@ -6566,7 +6566,7 @@ var APP_DATA = {
     },
     {
       "id": "131-9-al-spa",
-      "name": "9. Al Spa",
+      "name": "9. Camino de Flores",
       "levels": [
         {
           "tileSize": 256,
@@ -6634,7 +6634,7 @@ var APP_DATA = {
     },
     {
       "id": "132-9-arbol",
-      "name": "9. Arbol",
+      "name": "9. Punto de Reunión San Antonio",
       "levels": [
         {
           "tileSize": 256,
@@ -6690,7 +6690,7 @@ var APP_DATA = {
     },
     {
       "id": "133-7-salon-belleza",
-      "name": "7. Salon Belleza",
+      "name": "7. Salón de Belleza",
       "levels": [
         {
           "tileSize": 256,
@@ -6746,7 +6746,7 @@ var APP_DATA = {
     },
     {
       "id": "134-29-capilla-1",
-      "name": "29. Capilla 1",
+      "name": "29. Capilla",
       "levels": [
         {
           "tileSize": 256,
@@ -6852,7 +6852,7 @@ var APP_DATA = {
     },
     {
       "id": "136-17-tunel-medio",
-      "name": "17. Tunel Medio",
+      "name": "17. Tunel",
       "levels": [
         {
           "tileSize": 256,
@@ -6958,7 +6958,7 @@ var APP_DATA = {
     },
     {
       "id": "138-17-tunel-baos",
-      "name": "17. Tunel Baños",
+      "name": "17. Tunel",
       "levels": [
         {
           "tileSize": 256,
@@ -6996,7 +6996,7 @@ var APP_DATA = {
     },
     {
       "id": "139-22-escaleras-capilla-pilares",
-      "name": "22. Escaleras Capilla Pilares",
+      "name": "22. Habitación 227 Acceso",
       "levels": [
         {
           "tileSize": 256,
@@ -7046,7 +7046,7 @@ var APP_DATA = {
     },
     {
       "id": "140-40-jardin-pilares-2",
-      "name": "40. Jardin Pilares 2",
+      "name": "40. Jardin Pilares",
       "levels": [
         {
           "tileSize": 256,
@@ -7090,7 +7090,7 @@ var APP_DATA = {
     },
     {
       "id": "141-17-tunel-centro",
-      "name": "17. Tunel Centro",
+      "name": "17. Tunel",
       "levels": [
         {
           "tileSize": 256,
@@ -7134,7 +7134,7 @@ var APP_DATA = {
     },
     {
       "id": "142-23-entrada-saln-la-zafra_",
-      "name": "23. Entrada, Salón la Zafra",
+      "name": "23. Salón la Zafra",
       "levels": [
         {
           "tileSize": 256,
@@ -7290,7 +7290,7 @@ var APP_DATA = {
     },
     {
       "id": "145-39-carreta-evento",
-      "name": "39. Carreta Evento",
+      "name": "39. Carreta de la Zafra",
       "levels": [
         {
           "tileSize": 256,
@@ -7346,7 +7346,7 @@ var APP_DATA = {
     },
     {
       "id": "146-24-saln-troje-1",
-      "name": "24. Salón Troje 1",
+      "name": "24. Salón Troje",
       "levels": [
         {
           "tileSize": 256,
@@ -7384,7 +7384,7 @@ var APP_DATA = {
     },
     {
       "id": "147-24-saln-troje-3",
-      "name": "24. Salón Troje 3",
+      "name": "24. Salón Troje",
       "levels": [
         {
           "tileSize": 256,
@@ -7422,7 +7422,7 @@ var APP_DATA = {
     },
     {
       "id": "148-24-saln-troje-2",
-      "name": "24. Salón Troje 2",
+      "name": "24. Salón Troje",
       "levels": [
         {
           "tileSize": 256,
@@ -7478,7 +7478,7 @@ var APP_DATA = {
     },
     {
       "id": "149-24-saln-troje-montado",
-      "name": "24. Salón Troje Montado",
+      "name": "24. Salón Troje",
       "levels": [
         {
           "tileSize": 256,
@@ -7584,7 +7584,7 @@ var APP_DATA = {
     },
     {
       "id": "151-38-alberca-bicentenario-area-camastros_",
-      "name": "38. Alberca Bicentenario, Area Camastros",
+      "name": "38. Alberca Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -7640,7 +7640,7 @@ var APP_DATA = {
     },
     {
       "id": "152-38-alberca-bicentenario-bancos_",
-      "name": "38. Alberca Bicentenario, Bancos",
+      "name": "38. Alberca Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -7708,7 +7708,7 @@ var APP_DATA = {
     },
     {
       "id": "153-38-alberca-bicentenario-barra_",
-      "name": "38. Alberca Bicentenario, Barra",
+      "name": "38. Alberca Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -7764,7 +7764,7 @@ var APP_DATA = {
     },
     {
       "id": "154-38-alberca-bicentenario-camastros-mrmol_",
-      "name": "38. Alberca Bicentenario, Camastros Mármol",
+      "name": "38. Alberca Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -7832,7 +7832,7 @@ var APP_DATA = {
     },
     {
       "id": "155-38-alberca-bicentenario-camastros_",
-      "name": "38. Alberca Bicentenario, Camastros",
+      "name": "38. Alberca Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -7888,7 +7888,7 @@ var APP_DATA = {
     },
     {
       "id": "156-38-alberca-bicentenario-camino-barra",
-      "name": "38. Alberca Bicentenario, Camino Barra",
+      "name": "38. Alberca Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -7938,7 +7938,7 @@ var APP_DATA = {
     },
     {
       "id": "157-38-alberca-bicentenario-jacuzzi_",
-      "name": "38. Alberca Bicentenario, Jacuzzi",
+      "name": "38. Alberca Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -8000,7 +8000,7 @@ var APP_DATA = {
     },
     {
       "id": "158-38-alberca-bicentenario-lado-barra_",
-      "name": "38. Alberca Bicentenario, Lado Barra",
+      "name": "38. Alberca Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -8080,7 +8080,7 @@ var APP_DATA = {
     },
     {
       "id": "159-38-alberca-bicentenario-lado-bicentenario_",
-      "name": "38. Alberca Bicentenario, lado Bicentenario",
+      "name": "38. Alberca Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -8142,7 +8142,7 @@ var APP_DATA = {
     },
     {
       "id": "160-38-alberca-bicentenario-lado-camastros_",
-      "name": "38. Alberca Bicentenario, lado Camastros",
+      "name": "38. Alberca Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -8216,7 +8216,7 @@ var APP_DATA = {
     },
     {
       "id": "161-38-alberca-bicentenario-puente_",
-      "name": "38. Alberca Bicentenario, Puente",
+      "name": "38. Alberca Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -8370,7 +8370,7 @@ var APP_DATA = {
     },
     {
       "id": "163-3-jardn-el-pochote_rio",
-      "name": "3. Jardín el Pochote_Rio",
+      "name": "3. Jardín el Pochote",
       "levels": [
         {
           "tileSize": 256,
@@ -8420,7 +8420,7 @@ var APP_DATA = {
     },
     {
       "id": "164-3-jardn-el-pochote-evento-2",
-      "name": "3. Jardín el Pochote Evento 2",
+      "name": "3. Jardín el Pochote",
       "levels": [
         {
           "tileSize": 256,
@@ -8470,7 +8470,7 @@ var APP_DATA = {
     },
     {
       "id": "165-3-jardn-el-pochote-evento-4",
-      "name": "3. Jardín el Pochote, Evento 4",
+      "name": "3. Jardín el Pochote",
       "levels": [
         {
           "tileSize": 256,
@@ -8526,7 +8526,7 @@ var APP_DATA = {
     },
     {
       "id": "166-3-jardn-el-pochote-evento-1",
-      "name": "3. Jardín el Pochote, Evento 1",
+      "name": "3. Jardín el Pochote",
       "levels": [
         {
           "tileSize": 256,
@@ -8576,7 +8576,7 @@ var APP_DATA = {
     },
     {
       "id": "167-3-jardn-el-pochote-evento-3",
-      "name": "3. Jardín el Pochote, Evento 3",
+      "name": "3. Jardín el Pochote",
       "levels": [
         {
           "tileSize": 256,
@@ -8676,7 +8676,7 @@ var APP_DATA = {
     },
     {
       "id": "169-1-saln-bicentenario-entrada",
-      "name": "1. Salón Bicentenario, Entrada",
+      "name": "1. Salón Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -8726,7 +8726,7 @@ var APP_DATA = {
     },
     {
       "id": "170-2-gym-correr",
-      "name": "2. Gym, Correr",
+      "name": "2. Gym",
       "levels": [
         {
           "tileSize": 256,
@@ -8770,7 +8770,7 @@ var APP_DATA = {
     },
     {
       "id": "171-2-gym-pasillo",
-      "name": "2. Gym, Pasillo",
+      "name": "2. Gym",
       "levels": [
         {
           "tileSize": 256,
@@ -8814,7 +8814,7 @@ var APP_DATA = {
     },
     {
       "id": "172-2-gym-pesas",
-      "name": "2. Gym, Pesas",
+      "name": "2. Gym",
       "levels": [
         {
           "tileSize": 256,
@@ -8852,7 +8852,7 @@ var APP_DATA = {
     },
     {
       "id": "173-1-saln-bicentenario-sala-espejo_",
-      "name": "1. Salón Bicentenario, Sala Espejo",
+      "name": "1. Salón Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -8896,7 +8896,7 @@ var APP_DATA = {
     },
     {
       "id": "174-1-saln-bicentenario-entrada-escaleras_",
-      "name": "1. Salón Bicentenario, Entrada Escaleras",
+      "name": "1. Salón Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -8953,7 +8953,7 @@ var APP_DATA = {
     },
     {
       "id": "175-1-saln-bicentenario-exterior",
-      "name": "1. Salón Bicentenario, Exterior",
+      "name": "1. Salón Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -8997,7 +8997,7 @@ var APP_DATA = {
     },
     {
       "id": "176-1-saln-bicentenario-medio",
-      "name": "1. Salón Bicentenario, Medio",
+      "name": "1. Salón Bicentenario",
       "levels": [
         {
           "tileSize": 256,
@@ -9085,7 +9085,7 @@ var APP_DATA = {
     },
     {
       "id": "178-22-escaleras-capilla-lado-derecho",
-      "name": "22. Escaleras Capilla lado Derecho",
+      "name": "22. Capilla Acceso 328",
       "levels": [
         {
           "tileSize": 256,
@@ -9135,7 +9135,7 @@ var APP_DATA = {
     },
     {
       "id": "179-22-escaleras-capilla-lado-izquierdo_",
-      "name": "22. Escaleras Capilla lado izquierdo",
+      "name": "22. Capilla Acceso Delux",
       "levels": [
         {
           "tileSize": 256,
@@ -12770,7 +12770,7 @@ var APP_DATA = {
     },
     {
       "id": "257-8-el-trapiche-entrada",
-      "name": "8. El Trapiche, Entrada",
+      "name": "8. El Trapiche",
       "levels": [
         {
           "tileSize": 256,
@@ -12826,7 +12826,7 @@ var APP_DATA = {
     },
     {
       "id": "258-8-el-trapiche-escaleras",
-      "name": "8. El Trapiche, Escaleras",
+      "name": "8. El Trapiche",
       "levels": [
         {
           "tileSize": 256,
@@ -12870,7 +12870,7 @@ var APP_DATA = {
     },
     {
       "id": "259-8-el-trapiche-zona-1",
-      "name": "8. El Trapiche, Zona 1",
+      "name": "8. El Trapiche",
       "levels": [
         {
           "tileSize": 256,
@@ -12914,7 +12914,7 @@ var APP_DATA = {
     },
     {
       "id": "260-8-el-trapiche-zona-2",
-      "name": "8. El Trapiche, Zona 2",
+      "name": "8. El Trapiche",
       "levels": [
         {
           "tileSize": 256,
@@ -14549,7 +14549,7 @@ var APP_DATA = {
     },
     {
       "id": "288-35-spa-espejos-hombres",
-      "name": "35. Spa Espejos Hombres",
+      "name": "35. Spa Hombres",
       "levels": [
         {
           "tileSize": 256,
@@ -14655,7 +14655,7 @@ var APP_DATA = {
     },
     {
       "id": "290-35-spa-lavamanos-hombres",
-      "name": "35. Spa Lavamanos Hombres",
+      "name": "35. Spa Hombres",
       "levels": [
         {
           "tileSize": 256,
@@ -14699,7 +14699,7 @@ var APP_DATA = {
     },
     {
       "id": "291-35-spa-lavamanos_vestidores-mujeres",
-      "name": "35. Spa Lavamanos_vestidores Mujeres",
+      "name": "35. Spa Mujeres",
       "levels": [
         {
           "tileSize": 256,
@@ -14793,7 +14793,7 @@ var APP_DATA = {
     },
     {
       "id": "293-35-spa-piso-mujeres",
-      "name": "35. Spa Piso Mujeres",
+      "name": "35. Spa Mujeres",
       "levels": [
         {
           "tileSize": 256,
@@ -14831,7 +14831,7 @@ var APP_DATA = {
     },
     {
       "id": "294-35-spa-piso-hombres",
-      "name": "35. Spa Piso Hombres",
+      "name": "35. Spa Hombres",
       "levels": [
         {
           "tileSize": 256,
@@ -14919,7 +14919,7 @@ var APP_DATA = {
     },
     {
       "id": "296-35-spa-sauna-hombres",
-      "name": "35. Spa Sauna Hombres",
+      "name": "35. Spa Hombres",
       "levels": [
         {
           "tileSize": 256,
@@ -14957,7 +14957,7 @@ var APP_DATA = {
     },
     {
       "id": "297-35-spa-sauna-mujeres",
-      "name": "35. Spa Sauna Mujeres",
+      "name": "35. Spa Mujeres",
       "levels": [
         {
           "tileSize": 256,
@@ -14995,7 +14995,7 @@ var APP_DATA = {
     },
     {
       "id": "298-35-spa-vestidores-hombres",
-      "name": "35. Spa Vestidores Hombres",
+      "name": "35. Spa Hombres",
       "levels": [
         {
           "tileSize": 256,
@@ -15127,7 +15127,7 @@ var APP_DATA = {
     },
     {
       "id": "301-35-spa-baera-hombres",
-      "name": "35. Spa Bañera Hombres",
+      "name": "35. Spa Hombres",
       "levels": [
         {
           "tileSize": 256,
@@ -15183,7 +15183,7 @@ var APP_DATA = {
     },
     {
       "id": "302-35-spa-baera-mujeres-1",
-      "name": "35. Spa Bañera Mujeres 1",
+      "name": "35. Spa Mujeres",
       "levels": [
         {
           "tileSize": 256,
@@ -15239,7 +15239,7 @@ var APP_DATA = {
     },
     {
       "id": "303-35-spa-baera-mujeres",
-      "name": "35. Spa Bañera Mujeres",
+      "name": "35. Spa Mujeres",
       "levels": [
         {
           "tileSize": 256,
@@ -15301,7 +15301,7 @@ var APP_DATA = {
     },
     {
       "id": "304-35-spa-baos-hombres",
-      "name": "35. Spa Baños Hombres",
+      "name": "35. Spa Hombres",
       "levels": [
         {
           "tileSize": 256,
@@ -15345,7 +15345,7 @@ var APP_DATA = {
     },
     {
       "id": "305-35-spa-baos-mujeres",
-      "name": "35. Spa Baños Mujeres",
+      "name": "35. Spa Mujeres",
       "levels": [
         {
           "tileSize": 256,
@@ -15383,7 +15383,7 @@ var APP_DATA = {
     },
     {
       "id": "306-35-spa-ducha-libre-hombres",
-      "name": "35. Spa Ducha Libre Hombres",
+      "name": "35. Spa Hombres",
       "levels": [
         {
           "tileSize": 256,
@@ -15427,7 +15427,7 @@ var APP_DATA = {
     },
     {
       "id": "307-35-spa-ducha-libre-mujeres",
-      "name": "35. Spa Ducha Libre Mujeres",
+      "name": "35. Spa Mujeres",
       "levels": [
         {
           "tileSize": 256,
@@ -15471,7 +15471,7 @@ var APP_DATA = {
     },
     {
       "id": "308-35-spa-duchas-hombres",
-      "name": "35. Spa Duchas Hombres",
+      "name": "35. Spa Hombres",
       "levels": [
         {
           "tileSize": 256,
