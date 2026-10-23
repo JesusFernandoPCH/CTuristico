@@ -1,0 +1,25 @@
+name = "fahp-concierge"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+# src/catalog.json is generated from ../data/hotel.json and ../data.js on every build/deploy.
+[build]
+command = "node build-catalog.mjs"
+
+[vars]
+# Sites allowed to call the chat endpoint (comma separated).
+ALLOWED_ORIGINS = "https://jesusfernandopch.github.io,http://127.0.0.1:8765,http://localhost:8765"
+MODEL = "claude-opus-5-5"
+EFFORT = "low"
+
+# Per-visitor limit: 10 messages per minute (approximate, applied per Cloudflare location).
+[[ratelimits]]
+name = "CHAT_LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 10
+  period = 60
+
+# ANTHROPIC_API_KEY is a secret: `npx wrangler secret put ANTHROPIC_API_KEY`
+# (for `wrangler dev`, put it in .dev.vars, which is git-ignored).

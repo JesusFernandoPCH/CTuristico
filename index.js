@@ -33,7 +33,8 @@
   var customMenu = document.querySelector('#customMenu');
   var customMenuToggle = document.querySelector('#customMenuToggle');
   // Everything behind the welcome screen; inert until the visitor enters.
-  var tourChrome = [panoElement, document.querySelector('.tour-bar'), sceneListElement, customMenu, document.querySelector('.control-bar')];
+  var tourChrome = [panoElement, document.querySelector('.tour-bar'), sceneListElement, customMenu, document.querySelector('.control-bar'),
+    document.querySelector('#chatToggle'), document.querySelector('#chat')];
 
   // Detect desktop or mobile mode.
   var mql = matchMedia('(max-width: 500px), (max-height: 500px)');
@@ -498,6 +499,7 @@
     }
     var open = document.querySelector('.info-tour-modal.open');
     if (open) {
+      e.preventDefault(); // this Escape is used up; the chat stays open
       closeModal(open);
     } else {
       setSceneListOpen(false);
@@ -530,6 +532,19 @@
       }
     });
   });
+
+  // What the concierge chat (chat.js) needs from the tour.
+  window.tour = {
+    goTo: function(id) {
+      var s = findSceneById(id);
+      if (s) {
+        switchScene(s);
+      }
+    },
+    currentSceneId: function() {
+      return currentScene ? currentScene.data.id : null;
+    }
+  };
 
   // Display the initial scene, then fill the scene list once the area names arrive.
   switchScene(scenes[0]);

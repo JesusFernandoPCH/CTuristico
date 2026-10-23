@@ -26,6 +26,21 @@ python -m http.server 8000
 
 Los ids de escena siguen el formato `<índice>-<área>-<slug>`; el número de área enlaza cada escena con `data/hotel.json`.
 
+## Concierge virtual (chatbot)
+
+`chat.js` es el widget del tour; `chatbot/` es el backend, un Cloudflare Worker que llama a Claude y guarda la API key como secreto. El asistente responde con los datos de `data/hotel.json` y puede mover el tour a cualquier vista con la herramienta `mostrar_lugar`.
+
+```bash
+cd chatbot
+npm install
+npm test                                  # pruebas sin red ni API key
+npx wrangler login                        # una vez, abre el navegador
+npx wrangler secret put ANTHROPIC_API_KEY # pega la key de console.anthropic.com
+npm run deploy                            # imprime la URL del Worker
+```
+
+Después de desplegar, pon `https://<worker>/chat` en `<meta name="chat-endpoint">` de `index.html`. En local, el tour usa `http://127.0.0.1:8787/chat` (`npm run dev` con la key en `chatbot/.dev.vars`).
+
 ## Validar los datos
 
 ```bash
