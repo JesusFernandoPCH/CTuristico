@@ -20,7 +20,7 @@ python -m http.server 8000
 | `index.html` | Página: menú lateral, modales (Información, Ubicación, Mapa) y controles |
 | `index.js` | Visor Marzipano, lista de escenas, hotspots y modales |
 | `data.js` | Escenas del tour (generado con [Marzipano Tool](https://www.marzipano.net), nombres corregidos a mano) |
-| `data/hotel.json` | Fuente de verdad del hotel: áreas, contacto, horarios e historia |
+| `data/hotel.json` | Fuente de verdad del hotel: áreas (la lista de lugares del tour toma de aquí sus nombres), contacto, horarios e historia |
 | `tiles/` | Imágenes de las panorámicas por escena |
 | `scripts/check-data.js` | Valida que escenas, áreas, enlaces e imágenes sean consistentes |
 

@@ -3,144 +3,158 @@
 <head>
 <title>Tour 360 · Fiesta Americana Hacienda San Antonio El Puente</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Recorrido virtual 360° por el hotel Fiesta Americana Hacienda San Antonio El Puente, Morelos.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Recorrido virtual 360° por el hotel Fiesta Americana Hacienda San Antonio El Puente, en Xochitepec, Morelos.">
+<meta name="theme-color" content="#111111">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@400,500&amp;display=swap">
 <link rel="stylesheet" href="vendor/reset.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="multiple-scenes view-control-buttons">
+<body>
 
-<div id="titleBar">
-  <div id="customTitleBar" class="custom-title-bar">
-    <div class="custom-title-sub" id="customTitleSub"></div>
+<div id="pano"></div>
+
+<!-- Bienvenida -->
+<section id="welcome" class="welcome" aria-labelledby="welcomeTitle">
+  <div class="welcome-bar">
+    <img src="img/logo-oscuro.png" alt="Fiesta Americana" class="welcome-logo" width="783" height="379">
+    <a href="#" class="welcome-link" data-modal="ubicacionModal">Cómo llegar</a>
   </div>
+  <div class="welcome-body">
+    <h1 id="welcomeTitle" class="welcome-title">Hacienda San Antonio El Puente</h1>
+    <p class="welcome-lead">Una hacienda azucarera de 1590, hoy hotel en Xochitepec, Morelos. Recórrela en 360°.</p>
+    <div class="doors">
+      <a href="#" class="door" data-action="start">
+        <img src="img/info-tour.jpeg" alt="La chimenea del antiguo ingenio, de noche" width="280" height="373">
+        <span class="door-name">Recorrido 360°</span>
+        <span class="door-line">309 vistas en 40 espacios</span>
+      </a>
+      <a href="#" class="door" data-action="history">
+        <img src="img/info-tour9.jpg" alt="Túnel abovedado de ladrillo con barricas" width="280" height="373">
+        <span class="door-name">Historia</span>
+        <span class="door-line">Caña, revolución y cine</span>
+      </a>
+    </div>
+    <button type="button" class="btn-primary" data-action="start">Comenzar recorrido</button>
+  </div>
+</section>
+
+<!-- Barra superior del recorrido -->
+<div class="tour-bar">
+  <button type="button" id="sceneListToggle" class="bar-btn" aria-controls="sceneList" aria-expanded="false">Lugares</button>
+  <div id="titleBar" class="scene-chip" aria-live="polite">
+    <span class="disc" id="sceneDisc"></span>
+    <span class="scene-chip-name" id="sceneTitle"></span>
+  </div>
+  <button type="button" id="customMenuToggle" class="bar-btn" aria-controls="customMenu" aria-expanded="false">Menú</button>
 </div>
 
-<!-- Menú lateral derecho -->
-<nav id="customMenu" class="custom-menu">
-  <div class="custom-menu-header">
-    <img src="img/Logo.png" alt="Fiesta Americana" class="custom-menu-logo">
-    <div class="custom-menu-company">Fiesta Americana Hacienda San Antonio El Puente</div>
+<!-- Lista de lugares, agrupada por área del mapa -->
+<nav id="sceneList" class="places" aria-label="Lugares del hotel">
+  <div class="panel-head">
+    <h2>Lugares</h2>
+    <button type="button" class="panel-close" data-close="sceneList">Cerrar</button>
   </div>
-  <ul class="custom-menu-list">
-    <li><a href="#" id="infoTourBtn">Información</a></li>
-    <li><a href="#" id="ubicacionBtn">Ubicación</a></li>
-    <li><a href="#" id="planoBtn">Mapa</a></li>
-  </ul>
-  <div class="custom-menu-footer">
-    <div class="custom-menu-contact">
-      <div>Fiesta Americana</div>
-      <div><a href="mailto:GSHFAHP@Posadas.com">GSHFAHP@Posadas.com</a></div>
-      <div><a href="https://posadas.contactless.gocloud1.com/fahp" target="_blank" rel="noopener">MyServices</a></div>
-      <div><a href="tel:+527773620770">Tel. 777 362 0770</a></div>
-    </div>
-  </div>
+  <ol class="areas"></ol>
 </nav>
 
-<button id="customMenuToggle" class="custom-menu-toggle" aria-label="Abrir menú">
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
+<!-- Menú -->
+<nav id="customMenu" class="custom-menu" aria-label="Menú">
+  <div class="panel-head">
+    <img src="img/logo-oscuro.png" alt="Fiesta Americana Hacienda San Antonio El Puente" class="menu-logo" width="783" height="379">
+    <button type="button" class="panel-close" data-close="customMenu">Cerrar</button>
+  </div>
+  <ul class="custom-menu-list">
+    <li><a href="#" data-modal="infoTourModal">Historia de la hacienda</a></li>
+    <li><a href="#" data-modal="planoModal">Mapa del hotel</a></li>
+    <li><a href="#" data-modal="ubicacionModal">Cómo llegar</a></li>
+    <li><a href="https://posadas.contactless.gocloud1.com/fahp" target="_blank" rel="noopener">MyServices</a></li>
+  </ul>
+  <address class="custom-menu-contact">
+    <a href="tel:+527773620770">777 362 0770</a>
+    <a href="mailto:GSHFAHP@Posadas.com">GSHFAHP@Posadas.com</a>
+    <span>Reforma 2, Real del Puente, Xochitepec, Morelos</span>
+  </address>
+</nav>
 
-<!-- Modal Información -->
+<!-- Controles de vista -->
+<div class="control-bar">
+  <div class="view-controls">
+    <button type="button" id="viewLeft" class="ctrl" aria-label="Girar a la izquierda"><img src="img/left.png" alt="" width="60" height="60"></button>
+    <button type="button" id="viewUp" class="ctrl" aria-label="Mirar arriba"><img src="img/up.png" alt="" width="60" height="60"></button>
+    <button type="button" id="viewDown" class="ctrl" aria-label="Mirar abajo"><img src="img/down.png" alt="" width="60" height="60"></button>
+    <button type="button" id="viewRight" class="ctrl" aria-label="Girar a la derecha"><img src="img/right.png" alt="" width="60" height="60"></button>
+    <button type="button" id="viewIn" class="ctrl" aria-label="Acercar"><img src="img/plus.png" alt="" width="60" height="60"></button>
+    <button type="button" id="viewOut" class="ctrl" aria-label="Alejar"><img src="img/minus.png" alt="" width="60" height="60"></button>
+  </div>
+  <button type="button" id="autorotateToggle" class="ctrl" aria-label="Rotación automática" aria-pressed="false">
+    <img class="icon off" src="img/play.png" alt="" width="60" height="60">
+    <img class="icon on" src="img/pause.png" alt="" width="60" height="60">
+  </button>
+  <button type="button" id="fullscreenToggle" class="ctrl" aria-label="Pantalla completa" aria-pressed="false">
+    <img class="icon off" src="img/fullscreen.png" alt="" width="60" height="60">
+    <img class="icon on" src="img/windowed.png" alt="" width="60" height="60">
+  </button>
+</div>
+
+<!-- Modal Historia -->
 <div id="infoTourModal" class="info-tour-modal" role="dialog" aria-modal="true" aria-labelledby="infoTourTitle">
   <div class="info-tour-modal-bg"></div>
   <div class="info-tour-modal-content">
-    <button class="info-tour-modal-close" aria-label="Cerrar">&times;</button>
-    <div class="info-tour-modal-text">
-      <h2 class="info-tour-title" id="infoTourTitle">Fiesta Americana Hacienda San Antonio El Puente</h2>
-      <h3 class="info-tour-subtitle">Historia de la Hacienda</h3>
-      <div class="info-tour-desc info-tour-desc-large">
+    <button type="button" class="info-tour-modal-close">Cerrar</button>
+    <h2 class="info-tour-title" id="infoTourTitle">Historia de la hacienda</h2>
+    <div class="info-tour-desc">
             <p><strong>En el estado de Morelos, prácticamente la totalidad de las haciendas se dedicaron principalmente al cultivo de caña, producción de azúcar y productos afines.</strong></p>
             <p>Tal es el caso de la Hacienda San Antonio El Puente, misma que remonta sus orígenes como centro productor hacia <strong>finales de 1590</strong> (siglo XVI), cuando se otorgan las primeras Mercedes Reales por parte de la Corona Española con la finalidad de explotar la tierra con cultivos de caña.</p>
-            <img src="img/info-tour11.jpg" alt="Historia Hacienda" class="info-tour-img-inline" loading="lazy">
+            <img src="img/info-tour11.jpg" alt="Edificio del casco cubierto de hiedra, frente al jardín" class="info-tour-img-inline" width="1000" height="665" loading="lazy">
             <p>Así comienza esta larga historia y será a <strong>mediados del siglo XVIII (alrededor de 1750)</strong> cuando ya cuenta con una extensión considerable de más de 4000 hectáreas y el casco de la Hacienda se encuentra prácticamente consolidado como lo podemos apreciar hoy en día, con la magnificencia que caracteriza estos grandes centros productores de la región, con sus bóvedas de cañón, arcadas y demás elementos característicos del siglo XVI. Para estas fechas, cuenta con el cuarto de calderas, donde se procesa el jugo de caña, producto de la molienda, misma que en esta temprana época se procesa a base de una rueda hidráulica que más adelante sería sustituida por máquinas eléctricas o de vapor. Cuenta además con los purgares, los patios o asoleaderos, las torres, talleres de carpintería, caballerizas, la huerta y desde luego la casa principal, misma que además de la familia de los hacendados daba cabida al personal de confianza, tales como el administrador, mayordomos, nanas, el médico, el sacerdote, mozos, cocineras, etc., ya que los peones o jornaleros vivían en unos terrenos denominados “El Real” que se ubican a corta distancia, pero fuera del casco de la hacienda.</p>
-            <img src="img/info-tour8.jpg" alt="Historia Hacienda" class="info-tour-img-inline" loading="lazy">
+            <img src="img/info-tour8.jpg" alt="Fachada del casco de la hacienda y su jardín" class="info-tour-img-inline" width="960" height="660" loading="lazy">
             <p>En la <strong>época porfirista (1876-1911)</strong>, cuando estas haciendas llegaron a su esplendor, perteneció al Sr. Ramón Portillo y Gómez, quien fue uno de los hacendados con mayor conocimiento de todos los aspectos del riego, incluso escribió un libro que ayudó a muchos hacendados de su tiempo para mejorar las técnicas hidráulicas en sus cultivos. Para <strong>1897</strong>, esta sería la primera hacienda en utilizar una turbina hidráulica con un generador de energía eléctrica, aprovechando la altura y el caudal que le proporciona su acueducto. Para esta época, también es junto con la Hacienda de Vista Hermosa, de las únicas que dejan de producir azúcar para iniciar la producción de alcohol de caña.</p>
-            <img src="img/info-tour9.jpg" alt="Historia Hacienda" class="info-tour-img-inline" loading="lazy">
+            <img src="img/info-tour9.jpg" alt="Túnel abovedado de ladrillo con barricas" class="info-tour-img-inline" width="1600" height="1067" loading="lazy">
             <p>En los inicios del siglo XX, específicamente en <strong>1910-1911</strong>, esta hacienda, como todas las del estado y de la república, son paralizadas en su producción por el movimiento Revolucionario, siendo expropiadas sus tierras.</p>
             <p>Bajo estos techos, <strong>el 11 de abril de 1911</strong>, justo un día antes de la toma de la Ciudad de Cuernavaca, el General Asunción pernocta en la hacienda, con un contingente de más de 2000 hombres, para dirigirse al día siguiente a la entrega de las llaves de la ciudad al General Emiliano Zapata.</p>
             <p>Posteriormente, lo que quedó de la Hacienda fue convertida en molino de arroz y para los años <strong>1950-1955</strong> fue transformada en balneario. Por estas fechas, se rodaron importantes filmes con personajes del cine nacional, como “Los Gavilanes” con Pedro Infante (filmada en <strong>1954</strong>) y “El Ciclón” con Miguel Aceves Mejía.</p>
-            <img src="img/info-tour10.jpg" alt="Historia Hacienda" class="info-tour-img-inline" loading="lazy">
+            <img src="img/info-tour10.jpg" alt="Carteles de Los Gavilanes y El Ciclón, filmadas en la hacienda" class="info-tour-img-inline" width="1505" height="1262" loading="lazy">
             <p>Actualmente, sus instalaciones han sido bellamente acondicionadas para albergar a un Hotel Categoría Especial, con todas las comodidades y tecnologías modernas para sus exigentes huéspedes, y es también un bello escenario donde se filman desde programas de televisión y telenovelas hasta concursos de belleza.</p>
-            <img src="img/info-tour2.jpeg" alt="Historia Hacienda" class="info-tour-img-inline" loading="lazy">
-      </div>
-      <h3 class="info-tour-subtitle">Galería</h3>
-      <div class="info-tour-gallery">
-            <figure><img src="img/info-tour.jpeg" alt="Jardín y chimenea del antiguo ingenio, de noche" loading="lazy"><figcaption>Jardín y chimenea del antiguo ingenio, de noche</figcaption></figure>
-            <figure><img src="img/info-tour1.jpeg" alt="Fuente entre los muros originales de la hacienda" loading="lazy"><figcaption>Fuente entre los muros originales de la hacienda</figcaption></figure>
-            <figure><img src="img/info-tour3.jpg" alt="Explanada con fuente de piedra" loading="lazy"><figcaption>Explanada con fuente de piedra</figcaption></figure>
-            <figure><img src="img/info-tour4.jpg" alt="Casa principal y fuente del jardín" loading="lazy"><figcaption>Casa principal y fuente del jardín</figcaption></figure>
-            <figure><img src="img/info-tour5.jpg" alt="Corredor con carruaje antiguo" loading="lazy"><figcaption>Corredor con carruaje antiguo</figcaption></figure>
-            <figure><img src="img/info-tour6.jpg" alt="Patio central con fuente" loading="lazy"><figcaption>Patio central con fuente</figcaption></figure>
-            <figure><img src="img/info-tour7.jpg" alt="Arcos y jardín del casco" loading="lazy"><figcaption>Arcos y jardín del casco</figcaption></figure>
-      </div>
-      <a href="https://posadas.contactless.gocloud1.com/fahp" target="_blank" rel="noopener" class="info-tour-btn">MyServices</a>
+            <img src="img/info-tour2.jpeg" alt="Alberca entre los arcos de la hacienda" class="info-tour-img-inline" width="1440" height="1529" loading="lazy">
     </div>
+    <h3 class="info-tour-subtitle">Galería</h3>
+    <div class="info-tour-gallery">
+            <figure><img src="img/info-tour.jpeg" alt="Jardín y chimenea del antiguo ingenio, de noche" width="1440" height="1414" loading="lazy"><figcaption>Jardín y chimenea del antiguo ingenio, de noche</figcaption></figure>
+            <figure><img src="img/info-tour1.jpeg" alt="Fuente entre los muros originales de la hacienda" width="1440" height="1398" loading="lazy"><figcaption>Fuente entre los muros originales de la hacienda</figcaption></figure>
+            <figure><img src="img/info-tour3.jpg" alt="Explanada con fuente de piedra" width="1280" height="852" loading="lazy"><figcaption>Explanada con fuente de piedra</figcaption></figure>
+            <figure><img src="img/info-tour4.jpg" alt="Casa principal y fuente del jardín" width="1024" height="682" loading="lazy"><figcaption>Casa principal y fuente del jardín</figcaption></figure>
+            <figure><img src="img/info-tour5.jpg" alt="Corredor con carruaje antiguo" width="640" height="400" loading="lazy"><figcaption>Corredor con carruaje antiguo</figcaption></figure>
+            <figure><img src="img/info-tour6.jpg" alt="Patio central con fuente" width="1280" height="849" loading="lazy"><figcaption>Patio central con fuente</figcaption></figure>
+            <figure><img src="img/info-tour7.jpg" alt="Arcos y jardín del casco" width="1024" height="683" loading="lazy"><figcaption>Arcos y jardín del casco</figcaption></figure>
+    </div>
+    <a href="https://posadas.contactless.gocloud1.com/fahp" target="_blank" rel="noopener" class="btn-primary">Abrir MyServices</a>
   </div>
 </div>
 
-<!-- Modal Ubicación -->
-<div id="ubicacionModal" class="info-tour-modal" role="dialog" aria-modal="true" aria-label="Ubicación">
+<!-- Modal Cómo llegar -->
+<div id="ubicacionModal" class="info-tour-modal" role="dialog" aria-modal="true" aria-labelledby="ubicacionTitle">
   <div class="info-tour-modal-bg"></div>
-  <div class="info-tour-modal-content info-tour-modal-map">
-    <button class="info-tour-modal-close" aria-label="Cerrar">&times;</button>
-    <iframe class="map-embed" title="Mapa de ubicación" loading="lazy" src="https://maps.google.com/maps?q=Reforma+2+Real+del+Puente+6279&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed"></iframe>
+  <div class="info-tour-modal-content">
+    <button type="button" class="info-tour-modal-close">Cerrar</button>
+    <h2 class="info-tour-title" id="ubicacionTitle">Cómo llegar</h2>
+    <p class="info-tour-note">Reforma 2, Fracc. Real del Puente, 62790 Xochitepec, Morelos.</p>
+    <iframe class="map-embed" title="Mapa de ubicación del hotel" loading="lazy" src="https://maps.google.com/maps?q=Reforma+2+Real+del+Puente+6279&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed"></iframe>
   </div>
 </div>
 
 <!-- Modal Mapa -->
 <div id="planoModal" class="info-tour-modal" role="dialog" aria-modal="true" aria-labelledby="planoTitle">
   <div class="info-tour-modal-bg"></div>
-  <div class="info-tour-modal-content">
-    <button class="info-tour-modal-close" aria-label="Cerrar">&times;</button>
-    <div class="info-tour-modal-text">
-      <h2 class="info-tour-title" id="planoTitle">Mapa</h2>
-      <img class="plano-img" src="img/MapaNumeros.png" alt="Mapa del hotel con áreas numeradas" loading="lazy">
-    </div>
+  <div class="info-tour-modal-content info-tour-modal-wide">
+    <button type="button" class="info-tour-modal-close">Cerrar</button>
+    <h2 class="info-tour-title" id="planoTitle">Mapa del hotel</h2>
+    <p class="info-tour-note">Los números del mapa son los mismos de la lista de lugares.</p>
+    <img class="plano-img" src="img/MapaNumeros.png" alt="Mapa del hotel con sus 40 áreas numeradas" loading="lazy" width="1410" height="1098">
   </div>
 </div>
-
-<div id="pano"></div>
-
-<div id="sceneList">
-  <ul class="scenes"></ul>
-</div>
-
-<a href="javascript:void(0)" id="autorotateToggle" aria-label="Rotación automática">
-  <img class="icon off" src="img/play.png" alt="">
-  <img class="icon on" src="img/pause.png" alt="">
-</a>
-
-<a href="javascript:void(0)" id="fullscreenToggle" aria-label="Pantalla completa">
-  <img class="icon off" src="img/fullscreen.png" alt="">
-  <img class="icon on" src="img/windowed.png" alt="">
-</a>
-
-<a href="javascript:void(0)" id="sceneListToggle" aria-label="Lista de escenas">
-  <img class="icon off" src="img/expand.png" alt="">
-  <img class="icon on" src="img/collapse.png" alt="">
-</a>
-
-<a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1" aria-label="Arriba">
-  <img class="icon" src="img/up.png" alt="">
-</a>
-<a href="javascript:void(0)" id="viewDown" class="viewControlButton viewControlButton-2" aria-label="Abajo">
-  <img class="icon" src="img/down.png" alt="">
-</a>
-<a href="javascript:void(0)" id="viewLeft" class="viewControlButton viewControlButton-3" aria-label="Izquierda">
-  <img class="icon" src="img/left.png" alt="">
-</a>
-<a href="javascript:void(0)" id="viewRight" class="viewControlButton viewControlButton-4" aria-label="Derecha">
-  <img class="icon" src="img/right.png" alt="">
-</a>
-<a href="javascript:void(0)" id="viewIn" class="viewControlButton viewControlButton-5" aria-label="Acercar">
-  <img class="icon" src="img/plus.png" alt="">
-</a>
-<a href="javascript:void(0)" id="viewOut" class="viewControlButton viewControlButton-6" aria-label="Alejar">
-  <img class="icon" src="img/minus.png" alt="">
-</a>
 
 <script src="vendor/screenfull.min.js"></script>
 <script src="vendor/marzipano.js"></script>
