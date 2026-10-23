@@ -9,22 +9,36 @@ command = "node build-catalog.mjs"
 [vars]
 # Sites allowed to call the chat endpoint (comma separated).
 ALLOWED_ORIGINS = "https://jesusfernandopch.github.io,http://127.0.0.1:8765,http://localhost:8765"
-# "workers-ai": free daily quota on Cloudflare. "anthropic": Claude (needs the ANTHROPIC_API_KEY secret and credits).
-PROVIDER = "workers-ai"
+# "workers-ai": free daily quota on Cloudflare.
+# "openai-compat": any OpenAI-compatible endpoint, here Gemini's free tier (needs the LLM_API_KEY secret).
+# "anthropic": Claude (needs the ANTHROPIC_API_KEY secret and credits).
+PROVIDER = "openai-compat"
 WORKERS_AI_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+OPENAI_COMPAT_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
+# Tried in order; a busy (503) or rate-limited (429) model hands over to the next one.
+OPENAI_COMPAT_MODEL = "gemini-3.6-flash,gemini-3.5-flash-lite,gemini-3.8-flash"
 MODEL = "claude-opus-5-5"
 EFFORT = "low"
+# Small, cheap model that turns away off-topic messages before the main model runs. Empty disables it.
+GUARD_MODEL = "@cf/meta/llama-3.1-8b-instruct-fp8-fast"
+# Messages per visitor (IP) per UTC day, so one person can't use up the shared free quota.
+DAILY_LIMIT_PER_VISITOR = "30"
 
 [ai]
 binding = "AI"
 
-# Per-visitor limit: 10 messages per minute (approximate, applied per Cloudflare location).
+# Per-visitor daily message counts.
+[[kv_namespaces]]
+binding = "CHAT_QUOTA"
+id = "77873a124c2c4ec287ef46a59da8c92e"
+
+# Per-visitor burst limit: 6 messages per minute (approximate, applied per Cloudflare location).
 [[ratelimits]]
 name = "CHAT_LIMITER"
 namespace_id = "1001"
 
   [ratelimits.simple]
-  limit = 10
+  limit = 6
   period = 60
 
 # Only for PROVIDER = "anthropic": `npx wrangler secret put ANTHROPIC_API_KEY`

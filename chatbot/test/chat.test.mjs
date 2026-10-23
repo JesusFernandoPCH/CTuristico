@@ -4,6 +4,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { parseRequest, runChat, buildSystem, resolvePlace, REFUSAL_REPLY, RequestError } from '../src/chat.js';
 import { runChatWorkersAI } from '../src/workers-ai.js';
+import { runChatOpenAICompat, ProviderError } from '../src/openai-compat.js';
+import { isOnTopic, underDailyLimit, hotelStems, mentionsHotel, screenReply, OFF_TOPIC_REPLY } from '../src/guard.js';
 
 const catalog = JSON.parse(fs.readFileSync(new URL('../src/catalog.json', import.meta.url), 'utf8'));
 const scenesById = new Map(catalog.scenes.map((s) => [s.id, s]));
@@ -115,6 +117,84 @@ test('workers-ai: an unknown id moves nothing and a plain answer passes through'
   const out = await runChatWorkersAI(ai, { model: 'm' }, catalog, { messages: [{ role: 'user', content: 'x' }], sceneId: null });
   assert.equal(out.action, null);
   assert.ok(ai.calls[1].messages.at(-1).content.startsWith('Esa área no existe'));
+});
+
+test('guard: only a clear FUERA blocks; errors and unclear answers let the message through', async () => {
+  const msgs = [{ role: 'user', content: 'Resume Star Wars' }];
+  const ai = (response) => ({ run: async () => ({ response }) });
+  assert.equal(await isOnTopic(ai('FUERA'), 'm', msgs), false);
+  assert.equal(await isOnTopic(ai(' fuera.'), 'm', msgs), false);
+  assert.equal(await isOnTopic(ai('EN'), 'm', msgs), true);
+  assert.equal(await isOnTopic(ai('no sé'), 'm', msgs), true);
+  assert.equal(await isOnTopic({ run: async () => { throw new Error('quota'); } }, 'm', msgs), true);
+});
+
+test('guard: the follow-up context includes the last concierge reply', async () => {
+  let seen = '';
+  const ai = { run: async (model, params) => { seen = params.messages[1].content; return { response: 'EN' }; } };
+  await isOnTopic(ai, 'm', [{ role: 'user', content: 'Llévame al restaurante' }, { role: 'assistant', content: 'Te llevé a La Distral.' }, { role: 'user', content: '¿y a qué hora cierra?' }]);
+  assert.ok(seen.includes('Te llevé a La Distral.') && seen.includes('¿y a qué hora cierra?'));
+});
+
+test('mentionsHotel lets hotel words through and leaves the rest to the guard', () => {
+  const stems = hotelStems(catalog);
+  assert.ok(mentionsHotel('¿Quién fue el dueño de la hacienda en el porfiriato?', stems));
+  assert.ok(mentionsHotel('Cuéntame de Emiliano Zapata', stems));
+  assert.ok(mentionsHotel('¿A qué hora abre La Distral?', stems));
+  assert.ok(mentionsHotel('Llévame a las Caballerizas', stems));
+  assert.ok(!mentionsHotel('Hazme un resumen de Star Wars', stems));
+  assert.ok(!mentionsHotel('¿Cuál es la capital de Australia?', stems));
+  assert.ok(!mentionsHotel('Escribe una función en Python', stems));
+});
+
+test('screenReply replaces replies that contain code', () => {
+  assert.equal(screenReply('```python\nsorted(x)\n```'), OFF_TOPIC_REPLY);
+  assert.equal(screenReply('La Distral cierra a las 23:00.'), 'La Distral cierra a las 23:00.');
+});
+
+test('daily limit counts per visitor and stops at the limit', async () => {
+  const store = new Map();
+  const kv = { get: async (k) => store.get(k) ?? null, put: async (k, v) => { store.set(k, v); } };
+  for (let i = 0; i < 3; i++) assert.equal(await underDailyLimit(kv, '1.2.3.4', 3), true);
+  assert.equal(await underDailyLimit(kv, '1.2.3.4', 3), false);
+  assert.equal(await underDailyLimit(kv, '5.6.7.8', 3), true);
+});
+
+function fakeFetch(bodies) {
+  const sent = [];
+  const fn = async (url, init) => {
+    sent.push(JSON.parse(init.body));
+    const next = bodies.shift();
+    return { ok: next.status === undefined, status: next.status ?? 200, json: async () => next, text: async () => 'rate limited' };
+  };
+  return { fn, sent };
+}
+
+test('openai-compat: tool_calls move the tour and the tool result goes back with its id', async () => {
+  const f = fakeFetch([
+    { choices: [{ message: { content: null, tool_calls: [{ id: 'c1', type: 'function', function: { name: 'mostrar_lugar', arguments: '{"area":38,"detalle":"jacuzzi"}' } }] } }] },
+    { choices: [{ message: { content: 'Te llevé al jacuzzi.' } }] }
+  ]);
+  const out = await runChatOpenAICompat(f.fn, { url: 'u', model: 'm', apiKey: 'k' }, catalog, { messages: [{ role: 'user', content: 'Llévame al jacuzzi' }], sceneId: null });
+  assert.deepEqual(out, { reply: 'Te llevé al jacuzzi.', action: { type: 'goto', sceneId: JACUZZI } });
+  assert.equal(f.sent[0].tools[0].function.name, 'mostrar_lugar');
+  assert.equal(f.sent[0].tools[0].function.parameters.additionalProperties, undefined);
+  assert.deepEqual(f.sent[1].messages.at(-1), { role: 'tool', tool_call_id: 'c1', content: f.sent[1].messages.at(-1).content });
+});
+
+test('openai-compat: a busy model hands over to the next one in the list', async () => {
+  const f = fakeFetch([{ status: 503 }, { choices: [{ message: { content: 'Hola, bienvenido.' } }] }]);
+  const out = await runChatOpenAICompat(f.fn, { url: 'u', model: 'a, b', apiKey: 'k' }, catalog, { messages: [{ role: 'user', content: 'hola' }], sceneId: null });
+  assert.equal(out.reply, 'Hola, bienvenido.');
+  assert.deepEqual(f.sent.map((b) => b.model), ['a', 'b']);
+});
+
+test('openai-compat: an HTTP error surfaces as ProviderError with its status', async () => {
+  const f = fakeFetch([{ status: 429 }]);
+  await assert.rejects(
+    runChatOpenAICompat(f.fn, { url: 'u', model: 'm', apiKey: 'k' }, catalog, { messages: [{ role: 'user', content: 'hola' }], sceneId: null }),
+    (err) => err instanceof ProviderError && err.status === 429
+  );
 });
 
 test('a refusal returns the canned reply', async () => {

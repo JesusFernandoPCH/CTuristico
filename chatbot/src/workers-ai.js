@@ -28,7 +28,7 @@ export async function runChatWorkersAI(ai, config, catalog, { messages, sceneId 
   let lastText = '';
   const finalReply = () => lastText || (moved ? movedReply(moved) : 'Listo.');
   for (let round = 0; round <= LIMITS.maxToolRounds; round++) {
-    const res = await ai.run(config.model, { messages: convo, tools: AI_TOOLS, max_tokens: 600 });
+    const res = await ai.run(config.model, { messages: convo, tools: AI_TOOLS, max_tokens: 400 });
     config.onUsage?.(res.usage, config.model);
     lastText = (typeof res.response === 'string' ? res.response.trim() : '') || lastText;
     const calls = res.tool_calls || [];
