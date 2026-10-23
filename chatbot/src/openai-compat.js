@@ -35,17 +35,32 @@ export async function runChatOpenAICompat(fetchFn, config, catalog, { messages, 
   let moved = null;
   let lastText = '';
   const finalReply = () => lastText || (moved ? movedReply(moved) : 'Listo.');
-  for (let round = 0; round <= LIMITS.maxToolRounds; round++) {
-    const res = await fetchFn(config.url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${config.apiKey}` },
-      body: JSON.stringify({ model: config.model, messages: convo, tools: COMPAT_TOOLS, tool_choice: 'auto', max_tokens: 400 })
-    });
-    if (!res.ok) {
-      throw new ProviderError(res.status, `${res.status} ${(await res.text()).slice(0, 300)}`);
+  // config.model may list several models ("a,b,c"): a busy (503) or rate-limited (429) one hands over to the next.
+  const models = config.model.split(',').map((m) => m.trim()).filter(Boolean);
+  async function complete() {
+    let lastError;
+    for (const model of models) {
+      const res = await fetchFn(config.url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${config.apiKey}` },
+        // Thinking models (Gemini 3.x) spend part of max_tokens reasoning, so leave room for the reply.
+        body: JSON.stringify({ model, messages: convo, tools: COMPAT_TOOLS, tool_choice: 'auto', max_tokens: 2000 })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        config.onUsage?.(data.usage, model);
+        return data;
+      }
+      lastError = new ProviderError(res.status, `${model}: ${res.status} ${(await res.text()).slice(0, 300)}`);
+      if (res.status !== 503 && res.status !== 429) {
+        break;
+      }
     }
-    const data = await res.json();
-    config.onUsage?.(data.usage, config.model);
+    throw lastError;
+  }
+
+  for (let round = 0; round <= LIMITS.maxToolRounds; round++) {
+    const data = await complete();
     const message = data.choices?.[0]?.message || {};
     lastText = (typeof message.content === 'string' ? message.content.trim() : '') || lastText;
     const calls = message.tool_calls || [];

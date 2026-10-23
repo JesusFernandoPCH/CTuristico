@@ -182,6 +182,13 @@ test('openai-compat: tool_calls move the tour and the tool result goes back with
   assert.deepEqual(f.sent[1].messages.at(-1), { role: 'tool', tool_call_id: 'c1', content: f.sent[1].messages.at(-1).content });
 });
 
+test('openai-compat: a busy model hands over to the next one in the list', async () => {
+  const f = fakeFetch([{ status: 503 }, { choices: [{ message: { content: 'Hola, bienvenido.' } }] }]);
+  const out = await runChatOpenAICompat(f.fn, { url: 'u', model: 'a, b', apiKey: 'k' }, catalog, { messages: [{ role: 'user', content: 'hola' }], sceneId: null });
+  assert.equal(out.reply, 'Hola, bienvenido.');
+  assert.deepEqual(f.sent.map((b) => b.model), ['a', 'b']);
+});
+
 test('openai-compat: an HTTP error surfaces as ProviderError with its status', async () => {
   const f = fakeFetch([{ status: 429 }]);
   await assert.rejects(

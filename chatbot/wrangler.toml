@@ -15,7 +15,8 @@ ALLOWED_ORIGINS = "https://jesusfernandopch.github.io,http://127.0.0.1:8765,http
 PROVIDER = "openai-compat"
 WORKERS_AI_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 OPENAI_COMPAT_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
-OPENAI_COMPAT_MODEL = "gemini-3.8-flash"
+# Tried in order; a busy (503) or rate-limited (429) model hands over to the next one.
+OPENAI_COMPAT_MODEL = "gemini-3.6-flash,gemini-3.5-flash-lite,gemini-3.8-flash"
 MODEL = "claude-opus-5-5"
 EFFORT = "low"
 # Small, cheap model that turns away off-topic messages before the main model runs. Empty disables it.
