@@ -3,6 +3,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import catalog from './catalog.json';
 import { parseRequest, runChat, RequestError } from './chat.js';
 import { runChatWorkersAI } from './workers-ai.js';
+import { runChatOpenAICompat, ProviderError } from './openai-compat.js';
 import { isOnTopic, underDailyLimit, hotelStems, mentionsHotel, screenReply, OFF_TOPIC_REPLY } from './guard.js';
 
 const scenesById = new Map(catalog.scenes.map((s) => [s.id, s]));
@@ -66,14 +67,21 @@ export default {
 
     const onUsage = (usage, model) => console.log(JSON.stringify({ event: 'usage', provider: env.PROVIDER, model, usage }));
     try {
-      // PROVIDER picks the model backend: "workers-ai" (free daily quota) or "anthropic" (Claude, paid).
-      const result = env.PROVIDER === 'anthropic'
-        ? await runChat(new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1 }), { model: env.MODEL, effort: env.EFFORT, onUsage }, catalog, input)
-        : await runChatWorkersAI(env.AI, { model: env.WORKERS_AI_MODEL, onUsage }, catalog, input);
+      // PROVIDER picks the model backend: "workers-ai" (free daily quota), "openai-compat"
+      // (e.g. Gemini's free tier, key in the LLM_API_KEY secret) or "anthropic" (Claude, paid).
+      let result;
+      if (env.PROVIDER === 'anthropic') {
+        result = await runChat(new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1 }), { model: env.MODEL, effort: env.EFFORT, onUsage }, catalog, input);
+      } else if (env.PROVIDER === 'openai-compat') {
+        result = await runChatOpenAICompat(fetch, { url: env.OPENAI_COMPAT_URL, model: env.OPENAI_COMPAT_MODEL, apiKey: env.LLM_API_KEY, onUsage }, catalog, input);
+      } else {
+        result = await runChatWorkersAI(env.AI, { model: env.WORKERS_AI_MODEL, onUsage }, catalog, input);
+      }
       return json({ ...result, reply: screenReply(result.reply) }, 200, cors);
     } catch (err) {
       console.error(err);
-      if (err instanceof Anthropic.RateLimitError || err instanceof Anthropic.InternalServerError) {
+      if (err instanceof Anthropic.RateLimitError || err instanceof Anthropic.InternalServerError ||
+          (err instanceof ProviderError && (err.status === 429 || err.status >= 500))) {
         return json({ error: 'El asistente está ocupado. Inténtalo en unos segundos.' }, 503, cors);
       }
       if (err instanceof Anthropic.APIError) {

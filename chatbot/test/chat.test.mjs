@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { parseRequest, runChat, buildSystem, resolvePlace, REFUSAL_REPLY, RequestError } from '../src/chat.js';
 import { runChatWorkersAI } from '../src/workers-ai.js';
+import { runChatOpenAICompat, ProviderError } from '../src/openai-compat.js';
 import { isOnTopic, underDailyLimit, hotelStems, mentionsHotel, screenReply, OFF_TOPIC_REPLY } from '../src/guard.js';
 
 const catalog = JSON.parse(fs.readFileSync(new URL('../src/catalog.json', import.meta.url), 'utf8'));
@@ -157,6 +158,36 @@ test('daily limit counts per visitor and stops at the limit', async () => {
   for (let i = 0; i < 3; i++) assert.equal(await underDailyLimit(kv, '1.2.3.4', 3), true);
   assert.equal(await underDailyLimit(kv, '1.2.3.4', 3), false);
   assert.equal(await underDailyLimit(kv, '5.6.7.8', 3), true);
+});
+
+function fakeFetch(bodies) {
+  const sent = [];
+  const fn = async (url, init) => {
+    sent.push(JSON.parse(init.body));
+    const next = bodies.shift();
+    return { ok: next.status === undefined, status: next.status ?? 200, json: async () => next, text: async () => 'rate limited' };
+  };
+  return { fn, sent };
+}
+
+test('openai-compat: tool_calls move the tour and the tool result goes back with its id', async () => {
+  const f = fakeFetch([
+    { choices: [{ message: { content: null, tool_calls: [{ id: 'c1', type: 'function', function: { name: 'mostrar_lugar', arguments: '{"area":38,"detalle":"jacuzzi"}' } }] } }] },
+    { choices: [{ message: { content: 'Te llevé al jacuzzi.' } }] }
+  ]);
+  const out = await runChatOpenAICompat(f.fn, { url: 'u', model: 'm', apiKey: 'k' }, catalog, { messages: [{ role: 'user', content: 'Llévame al jacuzzi' }], sceneId: null });
+  assert.deepEqual(out, { reply: 'Te llevé al jacuzzi.', action: { type: 'goto', sceneId: JACUZZI } });
+  assert.equal(f.sent[0].tools[0].function.name, 'mostrar_lugar');
+  assert.equal(f.sent[0].tools[0].function.parameters.additionalProperties, undefined);
+  assert.deepEqual(f.sent[1].messages.at(-1), { role: 'tool', tool_call_id: 'c1', content: f.sent[1].messages.at(-1).content });
+});
+
+test('openai-compat: an HTTP error surfaces as ProviderError with its status', async () => {
+  const f = fakeFetch([{ status: 429 }]);
+  await assert.rejects(
+    runChatOpenAICompat(f.fn, { url: 'u', model: 'm', apiKey: 'k' }, catalog, { messages: [{ role: 'user', content: 'hola' }], sceneId: null }),
+    (err) => err instanceof ProviderError && err.status === 429
+  );
 });
 
 test('a refusal returns the canned reply', async () => {

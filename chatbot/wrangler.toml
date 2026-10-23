@@ -9,9 +9,13 @@ command = "node build-catalog.mjs"
 [vars]
 # Sites allowed to call the chat endpoint (comma separated).
 ALLOWED_ORIGINS = "https://jesusfernandopch.github.io,http://127.0.0.1:8765,http://localhost:8765"
-# "workers-ai": free daily quota on Cloudflare. "anthropic": Claude (needs the ANTHROPIC_API_KEY secret and credits).
-PROVIDER = "workers-ai"
+# "workers-ai": free daily quota on Cloudflare.
+# "openai-compat": any OpenAI-compatible endpoint, here Gemini's free tier (needs the LLM_API_KEY secret).
+# "anthropic": Claude (needs the ANTHROPIC_API_KEY secret and credits).
+PROVIDER = "openai-compat"
 WORKERS_AI_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+OPENAI_COMPAT_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
+OPENAI_COMPAT_MODEL = "gemini-3.8-flash"
 MODEL = "claude-opus-5-5"
 EFFORT = "low"
 # Small, cheap model that turns away off-topic messages before the main model runs. Empty disables it.
