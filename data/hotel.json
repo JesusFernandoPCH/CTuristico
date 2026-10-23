@@ -57,8 +57,8 @@
     { "numero": 36, "nombre": "Villas", "tipo": "habitaciones", "nota": "Villas 1, 2, 3, 5, 6, 7 y 8" },
     { "numero": 37, "nombre": "Alberca Villas", "tipo": "alberca" },
     { "numero": 38, "nombre": "Alberca Bicentenario", "tipo": "alberca" },
-    { "numero": 39, "nombre": "Carreta de la Zafra", "tipo": "espacio" },
-    { "numero": 40, "nombre": "Jardín Pilares", "tipo": "jardin" }
+    { "numero": 39, "nombre": "Jardín Pilares", "tipo": "jardin" },
+    { "numero": 40, "nombre": "Carreta de la Zafra", "tipo": "espacio" }
   ],
   "historia": [
     { "fecha": "finales de 1590", "hecho": "La Corona Española otorga las primeras Mercedes Reales para cultivar caña; origen de la hacienda." },
