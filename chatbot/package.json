@@ -1,0 +1,17 @@
+{
+  "name": "fahp-concierge",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "catalog": "node build-catalog.mjs",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "node build-catalog.mjs && node --test \"test/*.test.mjs\""
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.2.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.152.0"
+  }
+}

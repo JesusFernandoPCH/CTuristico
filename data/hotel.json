@@ -1,0 +1,73 @@
+{
+  "nombre": "Fiesta Americana Hacienda San Antonio El Puente",
+  "marca": "Fiesta Americana (Grupo Posadas)",
+  "ubicacion": {
+    "direccion": "Reforma 2 Fracc. Real del Puente, 62790 Xochitepec, Morelos, México",
+    "google_maps": "https://maps.google.com/maps?q=Reforma+2+Real+del+Puente+6279"
+  },
+  "contacto": {
+    "email": "GSHFAHP@Posadas.com",
+    "telefono": "777 362 0770",
+    "myservices": "https://posadas.contactless.gocloud1.com/fahp"
+  },
+  "horarios": {
+    "_fuente": "img/mapa_hotel.pdf (desactualizado: verificar con el hotel antes de publicar)",
+    "Restaurante La Distral": "7:00 a 23:00",
+    "Room Service": "24 horas",
+    "Alberca": "8:00 a 20:00",
+    "Gimnasio": "24 horas",
+    "Bar": "13:00 a 1:00"
+  },
+  "areas": [
+    { "numero": 1, "nombre": "Salón Bicentenario", "tipo": "salon" },
+    { "numero": 2, "nombre": "Gimnasio", "tipo": "servicio" },
+    { "numero": 3, "nombre": "Jardín el Pochote", "tipo": "jardin" },
+    { "numero": 4, "nombre": "Habitaciones del Río", "tipo": "habitaciones", "habitaciones": ["101-106 (PB)", "201-220 (PA)"] },
+    { "numero": 5, "nombre": "Jardín del Hule", "tipo": "jardin" },
+    { "numero": 6, "nombre": "Habitaciones de la Noria", "tipo": "habitaciones", "habitaciones": ["107-114 (PB)", "245-254 (PA)"] },
+    { "numero": 7, "nombre": "Salón de Belleza", "tipo": "servicio", "antes": "Fiesta Kids (demolido y remodelado)" },
+    { "numero": 8, "nombre": "El Trapiche", "tipo": "espacio" },
+    { "numero": 9, "nombre": "Jardín de la Fuente", "tipo": "jardin" },
+    { "numero": 10, "nombre": "Suites", "tipo": "habitaciones" },
+    { "numero": 11, "nombre": "Salón La Fuente", "tipo": "salon" },
+    { "numero": 12, "nombre": "Salón El Puente", "tipo": "salon" },
+    { "numero": 13, "nombre": "Biblioteca", "tipo": "servicio" },
+    { "numero": 14, "nombre": "Suites", "tipo": "habitaciones" },
+    { "numero": 15, "nombre": "Recepción", "tipo": "servicio" },
+    { "numero": 16, "nombre": "Terraza el Chacuaco", "tipo": "terraza", "nota": "Planta alta; incluye el Bar Gavilanes" },
+    { "numero": 17, "nombre": "Túnel", "tipo": "pasillo", "nota": "Planta baja de la Terraza el Chacuaco" },
+    { "numero": 18, "nombre": "Starbucks", "tipo": "cafeteria" },
+    { "numero": 19, "nombre": "Bar Stelaris", "tipo": "bar" },
+    { "numero": 20, "nombre": "El Baúl", "tipo": "tienda", "nota": "Boutique" },
+    { "numero": 21, "nombre": "Oficina de Bodas y Eventos", "tipo": "servicio" },
+    { "numero": 22, "nombre": "Habitaciones de Capilla", "tipo": "habitaciones", "habitaciones": ["221-234 (piso 1)", "321-334 (piso 2)", "235-244 (Deluxe Capilla)"] },
+    { "numero": 23, "nombre": "Salón La Zafra", "tipo": "salon" },
+    { "numero": 24, "nombre": "Salón Troje", "tipo": "salon" },
+    { "numero": 25, "nombre": "Salón Cañaverales", "tipo": "salon" },
+    { "numero": 26, "nombre": "Restaurante La Distral", "tipo": "restaurante", "antes": "La Molienda" },
+    { "numero": 27, "nombre": "Jardín el Chacuaco", "tipo": "jardin" },
+    { "numero": 28, "nombre": "Explanada", "tipo": "jardin" },
+    { "numero": 29, "nombre": "Capilla", "tipo": "capilla" },
+    { "numero": 30, "nombre": "Habitaciones Huerto 1", "tipo": "habitaciones", "habitaciones": ["115-126 (PB)", "255-266 (PA)"] },
+    { "numero": 31, "nombre": "Jardín Caballerizas", "tipo": "jardin" },
+    { "numero": 32, "nombre": "Habitaciones Huerto 2", "tipo": "habitaciones", "habitaciones": ["127-131 (PB)", "267-273 (PA)", "335-341"] },
+    { "numero": 33, "nombre": "Jardín del Lago", "tipo": "jardin" },
+    { "numero": 34, "nombre": "Explanada del Chacuaco", "tipo": "jardin" },
+    { "numero": 35, "nombre": "Spa", "tipo": "spa" },
+    { "numero": 36, "nombre": "Villas", "tipo": "habitaciones", "nota": "Villas 1, 2, 3, 5, 6, 7 y 8" },
+    { "numero": 37, "nombre": "Alberca Villas", "tipo": "alberca" },
+    { "numero": 38, "nombre": "Alberca Bicentenario", "tipo": "alberca" },
+    { "numero": 39, "nombre": "Jardín Pilares", "tipo": "jardin" },
+    { "numero": 40, "nombre": "Carreta de la Zafra", "tipo": "espacio" }
+  ],
+  "historia": [
+    { "fecha": "finales de 1590", "hecho": "La Corona Española otorga las primeras Mercedes Reales para cultivar caña; origen de la hacienda." },
+    { "fecha": "c. 1750", "hecho": "Supera las 4000 hectáreas y el casco queda consolidado: bóvedas de cañón, arcadas, cuarto de calderas, purgares, caballerizas, huerta y casa principal." },
+    { "fecha": "1876-1911", "hecho": "En el Porfiriato pertenece a Ramón Portillo y Gómez, experto en técnicas de riego." },
+    { "fecha": "1897", "hecho": "Primera hacienda en usar una turbina hidráulica con generador eléctrico, gracias a su acueducto. Pasa de producir azúcar a alcohol de caña." },
+    { "fecha": "1910-1911", "hecho": "La Revolución paraliza la producción y sus tierras son expropiadas." },
+    { "fecha": "11 de abril de 1911", "hecho": "El General Asunción pernocta aquí con más de 2000 hombres, un día antes de entregar las llaves de Cuernavaca a Emiliano Zapata." },
+    { "fecha": "1950-1955", "hecho": "Tras ser molino de arroz se convierte en balneario. Se filman 'Los Gavilanes' (Pedro Infante, 1954) y 'El Ciclón' (Miguel Aceves Mejía)." },
+    { "fecha": "hoy", "hecho": "Hotel Categoría Especial y escenario de programas de televisión, telenovelas y concursos de belleza." }
+  ]
+}

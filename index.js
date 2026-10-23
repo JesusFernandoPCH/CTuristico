@@ -13,160 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-// Permitir cerrar el menú de escenas de Marzipano al hacer clic fuera
-document.addEventListener('DOMContentLoaded', function() {
-  var sceneListElement = document.getElementById('sceneList');
-  var sceneListToggleElement = document.getElementById('sceneListToggle');
-  if (sceneListElement && sceneListToggleElement) {
-    document.addEventListener('mousedown', function(e) {
-      // Si el menú está abierto y el clic no es dentro del menú ni en el botón toggle
-      if (sceneListElement.classList.contains('enabled')) {
-        if (!sceneListElement.contains(e.target) && !sceneListToggleElement.contains(e.target)) {
-          sceneListElement.classList.remove('enabled');
-          sceneListToggleElement.classList.remove('enabled');
-          // Si tienes lógica para mostrar el título, aquí puedes mostrarlo de nuevo
-          var titleBar = document.getElementById('titleBar');
-          if (titleBar) titleBar.style.display = '';
-        }
-      }
-    });
-  }
-});
-
-// --- Modal Información del Tour ---
-document.addEventListener('DOMContentLoaded', function() {
-  var infoTourBtn = document.getElementById('infoTourBtn');
-  var infoTourModal = document.getElementById('infoTourModal');
-  var infoTourClose = document.getElementById('infoTourClose');
-  var infoTourBg = infoTourModal ? infoTourModal.querySelector('.info-tour-modal-bg') : null;
-  if (infoTourBtn && infoTourModal && infoTourClose && infoTourBg) {
-    var modalOpen = false;
-    function openModal() {
-      if (modalOpen) return;
-      infoTourModal.classList.add('open');
-      modalOpen = true;
-    }
-    function closeModal() {
-      infoTourModal.classList.remove('open');
-      modalOpen = false;
-    }
-    infoTourBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      openModal();
-    });
-    infoTourClose.addEventListener('click', function() {
-      closeModal();
-    });
-    infoTourBg.addEventListener('click', function() {
-      closeModal();
-    });
-    // Opcional: cerrar con ESC
-    document.addEventListener('keydown', function(e) {
-      if (modalOpen && (e.key === 'Escape' || e.key === 'Esc')) closeModal();
-    });
-  }
-});
-
-// --- Modal Ubicación ---
-document.addEventListener('DOMContentLoaded', function() {
-  var ubicacionBtn = document.getElementById('ubicacionBtn');
-  var ubicacionModal = document.getElementById('ubicacionModal');
-  var ubicacionClose = document.getElementById('ubicacionClose');
-  var ubicacionBg = ubicacionModal ? ubicacionModal.querySelector('.ubicacion-modal-bg') : null; // Updated class
-  if (ubicacionBtn && ubicacionModal && ubicacionClose && ubicacionBg) {
-    var modalOpen = false;
-    function openModal() {
-      if (modalOpen) return;
-      ubicacionModal.classList.add('open');
-      modalOpen = true;
-    }
-    function closeModal() {
-      ubicacionModal.classList.remove('open');
-      modalOpen = false;
-    }
-    ubicacionBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      openModal();
-    });
-    ubicacionClose.addEventListener('click', function() {
-      closeModal();
-    });
-    ubicacionBg.addEventListener('click', function() {
-      closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-      if (modalOpen && (e.key === 'Escape' || e.key === 'Esc')) closeModal();
-    });
-  }
-});
-
-// --- Modal Plano ---
-document.addEventListener('DOMContentLoaded', function() {
-  var planoBtn = document.getElementById('planoBtn');
-  var planoModal = document.getElementById('planoModal');
-  var planoClose = document.getElementById('planoClose');
-  var planoBg = planoModal ? planoModal.querySelector('.info-tour-modal-bg') : null;
-  if (planoBtn && planoModal && planoClose && planoBg) {
-    var modalOpen = false;
-    function openModal() {
-      if (modalOpen) return;
-      planoModal.classList.add('open');
-      modalOpen = true;
-    }
-    function closeModal() {
-      planoModal.classList.remove('open');
-      modalOpen = false;
-    }
-    planoBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      openModal();
-    });
-    planoClose.addEventListener('click', function() {
-      closeModal();
-    });
-    planoBg.addEventListener('click', function() {
-      closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-      if (modalOpen && (e.key === 'Escape' || e.key === 'Esc')) closeModal();
-    });
-  }
-});
-
 'use strict';
 
 (function() {
   var Marzipano = window.Marzipano;
-  var bowser = window.bowser;
   var screenfull = window.screenfull;
   var data = window.APP_DATA;
 
   // Grab elements from DOM.
   var panoElement = document.querySelector('#pano');
-  var sceneNameElement = document.querySelector('#titleBar .sceneName');
+  var welcomeElement = document.querySelector('#welcome');
+  var sceneTitleElement = document.querySelector('#sceneTitle');
+  var sceneDiscElement = document.querySelector('#sceneDisc');
   var sceneListElement = document.querySelector('#sceneList');
-  var sceneElements = document.querySelectorAll('#sceneList .scene');
+  var areaListElement = document.querySelector('#sceneList .areas');
   var sceneListToggleElement = document.querySelector('#sceneListToggle');
   var autorotateToggleElement = document.querySelector('#autorotateToggle');
   var fullscreenToggleElement = document.querySelector('#fullscreenToggle');
+  var customMenu = document.querySelector('#customMenu');
+  var customMenuToggle = document.querySelector('#customMenuToggle');
+  // Everything behind the welcome screen; inert until the visitor enters.
+  var tourChrome = [panoElement, document.querySelector('.tour-bar'), sceneListElement, customMenu, document.querySelector('.control-bar'),
+    document.querySelector('#chatToggle'), document.querySelector('#chat')];
 
   // Detect desktop or mobile mode.
-  if (window.matchMedia) {
-    var setMode = function() {
-      if (mql.matches) {
-        document.body.classList.remove('desktop');
-        document.body.classList.add('mobile');
-      } else {
-        document.body.classList.remove('mobile');
-        document.body.classList.add('desktop');
-      }
-    };
-    var mql = matchMedia("(max-width: 500px), (max-height: 500px)");
-    setMode();
-    mql.addListener(setMode);
+  var mql = matchMedia('(max-width: 500px), (max-height: 500px)');
+  var setMode = function() {
+    document.body.classList.toggle('mobile', mql.matches);
+    document.body.classList.toggle('desktop', !mql.matches);
+  };
+  setMode();
+  if (mql.addEventListener) {
+    mql.addEventListener('change', setMode);
   } else {
-    document.body.classList.add('desktop');
+    mql.addListener(setMode);
   }
 
   // Detect whether we are on a touch device.
@@ -176,56 +56,129 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('touch');
   });
 
-  // Use tooltip fallback mode on IE < 11.
-  if (bowser.msie && parseFloat(bowser.version) < 11) {
-    document.body.classList.add('tooltip-fallback');
-  }
-
-  // Viewer options.
-  var viewerOpts = {
-    controls: {
-      mouseViewMode: data.settings.mouseViewMode
-    }
-  };
-
   // Initialize viewer.
-  var viewer = new Marzipano.Viewer(panoElement, viewerOpts);
+  var viewer = new Marzipano.Viewer(panoElement, {
+    controls: { mouseViewMode: data.settings.mouseViewMode }
+  });
 
-  // Create scenes.
-  var scenes = data.scenes.map(function(data) {
-    var urlPrefix = "tiles";
+  // Scenes are created on first visit: building all 309 up front made startup slow.
+  var scenes = data.scenes.map(function(sceneData) {
+    return { data: sceneData, scene: null, view: null };
+  });
+
+  function loadScene(s) {
+    if (s.scene) {
+      return s;
+    }
+    var urlPrefix = 'tiles/' + s.data.id;
     var source = Marzipano.ImageUrlSource.fromString(
-      urlPrefix + "/" + data.id + "/{z}/{f}/{y}/{x}.jpg",
-      { cubeMapPreviewUrl: urlPrefix + "/" + data.id + "/preview.jpg" });
-    var geometry = new Marzipano.CubeGeometry(data.levels);
-
-    var limiter = Marzipano.RectilinearView.limit.traditional(data.faceSize, 100*Math.PI/180, 120*Math.PI/180);
-    var view = new Marzipano.RectilinearView(data.initialViewParameters, limiter);
-
-    var scene = viewer.createScene({
+      urlPrefix + '/{z}/{f}/{y}/{x}.jpg',
+      { cubeMapPreviewUrl: urlPrefix + '/preview.jpg' });
+    var geometry = new Marzipano.CubeGeometry(s.data.levels);
+    var limiter = Marzipano.RectilinearView.limit.traditional(s.data.faceSize, 100*Math.PI/180, 120*Math.PI/180);
+    s.view = new Marzipano.RectilinearView(s.data.initialViewParameters, limiter);
+    s.scene = viewer.createScene({
       source: source,
       geometry: geometry,
-      view: view,
+      view: s.view,
       pinFirstLevel: true
     });
 
-    // Create link hotspots.
-    data.linkHotspots.forEach(function(hotspot) {
-      var element = createLinkHotspotElement(hotspot);
-      scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
+    s.data.linkHotspots.forEach(function(hotspot) {
+      s.scene.hotspotContainer().createHotspot(createLinkHotspotElement(hotspot), { yaw: hotspot.yaw, pitch: hotspot.pitch });
     });
-
-    // Create info hotspots.
-    data.infoHotspots.forEach(function(hotspot) {
-      var element = createInfoHotspotElement(hotspot);
-      scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
+    s.data.infoHotspots.forEach(function(hotspot) {
+      s.scene.hotspotContainer().createHotspot(createInfoHotspotElement(hotspot), { yaw: hotspot.yaw, pitch: hotspot.pitch });
     });
+    return s;
+  }
 
-    return {
-      data: data,
-      scene: scene,
-      view: view
-    };
+  // Scene ids are "<index>-<area>-<slug>" and names "<area>. <label>".
+  function areaOf(s) {
+    return parseInt(s.data.id.split('-')[1], 10);
+  }
+  function labelOf(s) {
+    return s.data.name.replace(/^\d+\.\s*/, '');
+  }
+
+  // Scene list grouped by the numbered areas of the hotel map. Area names come from
+  // data/hotel.json; without it (e.g. opened from file://) the first scene's name is used.
+  var sceneElements = [];
+  function buildSceneList(areaNames) {
+    var groups = {};
+    scenes.forEach(function(s) {
+      var n = areaOf(s);
+      (groups[n] = groups[n] || []).push(s);
+    });
+    Object.keys(groups).map(Number).sort(function(a, b) { return a - b; }).forEach(function(n) {
+      var item = document.createElement('li');
+      var single = groups[n].length === 1;
+      // An area with one view links straight to it; larger areas expand into their views.
+      var head = document.createElement(single ? 'a' : 'button');
+      head.className = 'area-head';
+      if (single) {
+        head.href = '#';
+        head.setAttribute('data-id', groups[n][0].data.id);
+        sceneElements.push(head);
+      } else {
+        head.type = 'button';
+        head.setAttribute('aria-expanded', 'false');
+      }
+      var disc = document.createElement('span');
+      disc.className = 'disc';
+      disc.textContent = n;
+      var name = document.createElement('span');
+      name.className = 'area-name';
+      name.textContent = areaNames[n] || labelOf(groups[n][0]).split(',')[0];
+      var count = document.createElement('span');
+      count.className = 'area-count';
+      count.textContent = groups[n].length === 1 ? '1 vista' : groups[n].length + ' vistas';
+      head.appendChild(disc);
+      head.appendChild(name);
+      head.appendChild(count);
+      item.appendChild(head);
+      areaListElement.appendChild(item);
+      if (single) {
+        return;
+      }
+
+      var list = document.createElement('ul');
+      list.className = 'area-scenes';
+      list.hidden = true;
+      groups[n].forEach(function(s) {
+        var li = document.createElement('li');
+        var link = document.createElement('a');
+        link.href = '#';
+        link.className = 'scene';
+        link.setAttribute('data-id', s.data.id);
+        link.textContent = labelOf(s);
+        li.appendChild(link);
+        list.appendChild(li);
+        sceneElements.push(link);
+      });
+      item.appendChild(list);
+    });
+  }
+
+  function setAreaOpen(head, open) {
+    head.setAttribute('aria-expanded', String(open));
+    head.nextElementSibling.hidden = !open;
+  }
+
+  areaListElement.addEventListener('click', function(e) {
+    var el = e.target.closest('[data-id]');
+    var head = e.target.closest('.area-head');
+    if (!el) {
+      if (head) {
+        setAreaOpen(head, head.getAttribute('aria-expanded') !== 'true');
+      }
+      return;
+    }
+    e.preventDefault();
+    switchScene(findSceneById(el.getAttribute('data-id')));
+    if (document.body.classList.contains('mobile')) {
+      setSceneListOpen(false);
+    }
   });
 
   // Set up autorotate, if enabled.
@@ -235,10 +188,8 @@ document.addEventListener('DOMContentLoaded', function() {
     targetFov: Math.PI/2
   });
   if (data.settings.autorotateEnabled) {
-    autorotateToggleElement.classList.add('enabled');
+    setPressed(autorotateToggleElement, true);
   }
-
-  // Set handler for autorotate toggle.
   autorotateToggleElement.addEventListener('click', toggleAutorotate);
 
   // Set up fullscreen mode, if supported.
@@ -248,123 +199,122 @@ document.addEventListener('DOMContentLoaded', function() {
       screenfull.toggle();
     });
     screenfull.on('change', function() {
-      if (screenfull.isFullscreen) {
-        fullscreenToggleElement.classList.add('enabled');
-      } else {
-        fullscreenToggleElement.classList.remove('enabled');
-      }
+      setPressed(fullscreenToggleElement, screenfull.isFullscreen);
     });
-  } else {
-    document.body.classList.add('fullscreen-disabled');
   }
 
-  // Set handler for scene list toggle.
-  sceneListToggleElement.addEventListener('click', function(e) {
-    toggleSceneList(e);
-    // --- Ocultar/mostrar título personalizado según estado del menú de escenas ---
-    var titleBar = document.getElementById('titleBar');
-    var sceneList = document.getElementById('sceneList');
-    // El menú de escenas está abierto si tiene la clase 'enabled'
-    var isOpen = sceneList.classList.contains('enabled');
-    // Alternar visibilidad del título
-    if (isOpen) {
-      titleBar.style.display = 'none';
-    } else {
-      titleBar.style.display = '';
+  function setPressed(el, on) {
+    el.classList.toggle('enabled', on);
+    el.setAttribute('aria-pressed', String(on));
+  }
+
+  // Side panels: the scene list on the left, the menu on the right. One open at a time.
+  function setSceneListOpen(open) {
+    sceneListElement.classList.toggle('enabled', open);
+    sceneListToggleElement.setAttribute('aria-expanded', String(open));
+    if (open) {
+      setMenuOpen(false);
+      var current = sceneListElement.querySelector('.scene.current');
+      if (current) {
+        current.scrollIntoView({ block: 'center' });
+      }
+    }
+  }
+  function setMenuOpen(open) {
+    customMenu.classList.toggle('open', open);
+    customMenuToggle.setAttribute('aria-expanded', String(open));
+    if (open) {
+      setSceneListOpen(false);
+    }
+  }
+
+  sceneListToggleElement.addEventListener('click', function() {
+    setSceneListOpen(!sceneListElement.classList.contains('enabled'));
+  });
+  customMenuToggle.addEventListener('click', function() {
+    setMenuOpen(!customMenu.classList.contains('open'));
+  });
+  document.querySelectorAll('[data-close]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (btn.getAttribute('data-close') === 'sceneList') {
+        setSceneListOpen(false);
+      } else {
+        setMenuOpen(false);
+      }
+    });
+  });
+
+  // Close a side panel when pressing outside of it.
+  document.addEventListener('mousedown', function(e) {
+    if (sceneListElement.classList.contains('enabled') &&
+        !sceneListElement.contains(e.target) && !sceneListToggleElement.contains(e.target)) {
+      setSceneListOpen(false);
+    }
+    if (customMenu.classList.contains('open') &&
+        !customMenu.contains(e.target) && !customMenuToggle.contains(e.target) && !e.target.closest('.info-tour-modal')) {
+      setMenuOpen(false);
     }
   });
-
-  // Start with the scene list open on desktop.
-  if (!document.body.classList.contains('mobile')) {
-    showSceneList();
-    // Asegura que el título esté oculto si el menú de escenas inicia abierto
-    var titleBar = document.getElementById('titleBar');
-    if (titleBar) titleBar.style.display = 'none';
-    // Cierra el menú de escenas automáticamente después de 5 segundos
-    setTimeout(function() {
-      hideSceneList();
-      if (titleBar) titleBar.style.display = '';
-    }, 5000);
-  } else {
-    // En móvil, asegúrate que el título esté visible al inicio
-    var titleBar = document.getElementById('titleBar');
-    if (titleBar) titleBar.style.display = '';
-  }
-
-  // Set handler for scene switch.
-  scenes.forEach(function(scene) {
-    var el = document.querySelector('#sceneList .scene[data-id="' + scene.data.id + '"]');
-    el.addEventListener('click', function() {
-      switchScene(scene);
-      // On mobile, hide scene list after selecting a scene.
-      if (document.body.classList.contains('mobile')) {
-        hideSceneList();
-      }
-    });
-  });
-
-  // DOM elements for view controls.
-  var viewUpElement = document.querySelector('#viewUp');
-  var viewDownElement = document.querySelector('#viewDown');
-  var viewLeftElement = document.querySelector('#viewLeft');
-  var viewRightElement = document.querySelector('#viewRight');
-  var viewInElement = document.querySelector('#viewIn');
-  var viewOutElement = document.querySelector('#viewOut');
-
-  // Dynamic parameters for controls.
-  var velocity = 0.7;
-  var friction = 3;
 
   // Associate view controls with elements.
+  var velocity = 0.7;
+  var friction = 3;
   var controls = viewer.controls();
-  controls.registerMethod('upElement',    new Marzipano.ElementPressControlMethod(viewUpElement,     'y', -velocity, friction), true);
-  controls.registerMethod('downElement',  new Marzipano.ElementPressControlMethod(viewDownElement,   'y',  velocity, friction), true);
-  controls.registerMethod('leftElement',  new Marzipano.ElementPressControlMethod(viewLeftElement,   'x', -velocity, friction), true);
-  controls.registerMethod('rightElement', new Marzipano.ElementPressControlMethod(viewRightElement,  'x',  velocity, friction), true);
-  controls.registerMethod('inElement',    new Marzipano.ElementPressControlMethod(viewInElement,  'zoom', -velocity, friction), true);
-  controls.registerMethod('outElement',   new Marzipano.ElementPressControlMethod(viewOutElement, 'zoom',  velocity, friction), true);
+  [
+    ['upElement', '#viewUp', 'y', -velocity],
+    ['downElement', '#viewDown', 'y', velocity],
+    ['leftElement', '#viewLeft', 'x', -velocity],
+    ['rightElement', '#viewRight', 'x', velocity],
+    ['inElement', '#viewIn', 'zoom', -velocity],
+    ['outElement', '#viewOut', 'zoom', velocity]
+  ].forEach(function(c) {
+    controls.registerMethod(c[0], new Marzipano.ElementPressControlMethod(document.querySelector(c[1]), c[2], c[3], friction), true);
+  });
 
-  function sanitize(s) {
-    return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
-  }
+  var currentScene = null;
 
-  function switchScene(scene) {
+  function switchScene(s) {
+    loadScene(s);
+    currentScene = s;
     stopAutorotate();
-    scene.view.setParameters(scene.data.initialViewParameters);
-    scene.scene.switchTo();
+    s.view.setParameters(s.data.initialViewParameters);
+    s.scene.switchTo();
     startAutorotate();
-    updateSceneName(scene);
-    updateSceneList(scene);
+    sceneDiscElement.textContent = areaOf(s);
+    sceneTitleElement.textContent = labelOf(s);
+    markCurrent(s);
   }
 
-  function updateSceneName(scene) {
-    sceneNameElement.innerHTML = sanitize(scene.data.name);
-  }
-
-  function updateSceneList(scene) {
+  function markCurrent(s) {
     for (var i = 0; i < sceneElements.length; i++) {
-      var el = sceneElements[i];
-      if (el.getAttribute('data-id') === scene.data.id) {
-        el.classList.add('current');
+      var isCurrent = sceneElements[i].getAttribute('data-id') === s.data.id;
+      sceneElements[i].classList.toggle('current', isCurrent);
+      if (isCurrent) {
+        sceneElements[i].setAttribute('aria-current', 'true');
+        var group = sceneElements[i].closest('.area-scenes');
+        if (group) {
+          setAreaOpen(group.previousElementSibling, true);
+        }
       } else {
-        el.classList.remove('current');
+        sceneElements[i].removeAttribute('aria-current');
       }
     }
   }
 
-  function showSceneList() {
-    sceneListElement.classList.add('enabled');
-    sceneListToggleElement.classList.add('enabled');
-  }
-
-  function hideSceneList() {
-    sceneListElement.classList.remove('enabled');
-    sceneListToggleElement.classList.remove('enabled');
-  }
-
-  function toggleSceneList() {
-    sceneListElement.classList.toggle('enabled');
-    sceneListToggleElement.classList.toggle('enabled');
+  // Camera push-in when entering the tour: from a wide field of view to the scene's own.
+  function pushIn(s) {
+    var target = s.data.initialViewParameters.fov;
+    var from = Math.min(target * 1.35, 110*Math.PI/180);
+    var duration = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1600;
+    var start = performance.now();
+    s.view.setFov(from);
+    requestAnimationFrame(function step(now) {
+      var p = duration ? Math.min((now - start) / duration, 1) : 1;
+      s.view.setFov(from + (target - from) * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) {
+        requestAnimationFrame(step);
+      }
+    });
   }
 
   function startAutorotate() {
@@ -381,75 +331,74 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function toggleAutorotate() {
-    if (autorotateToggleElement.classList.contains('enabled')) {
-      autorotateToggleElement.classList.remove('enabled');
-      stopAutorotate();
-    } else {
-      autorotateToggleElement.classList.add('enabled');
+    var on = !autorotateToggleElement.classList.contains('enabled');
+    setPressed(autorotateToggleElement, on);
+    if (on) {
       startAutorotate();
+    } else {
+      stopAutorotate();
     }
   }
 
+  // Hotspots live inside the panorama; give them button semantics so Tab and Enter reach them.
+  function makeKeyboardButton(el, label, action) {
+    el.setAttribute('role', 'button');
+    el.setAttribute('tabindex', '0');
+    if (label) {
+      el.setAttribute('aria-label', label);
+    }
+    el.addEventListener('click', action);
+    el.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        action();
+      }
+    });
+  }
+
   function createLinkHotspotElement(hotspot) {
-
-    // Create wrapper element to hold icon and tooltip.
     var wrapper = document.createElement('div');
-    wrapper.classList.add('hotspot');
-    wrapper.classList.add('link-hotspot');
+    wrapper.classList.add('hotspot', 'link-hotspot');
 
-    // Create image element.
     var icon = document.createElement('img');
     icon.src = 'img/link.png';
+    icon.alt = '';
     icon.classList.add('link-hotspot-icon');
+    icon.style.transform = 'rotate(' + hotspot.rotation + 'rad)';
 
-    // Set rotation transform.
-    var transformProperties = [ '-ms-transform', '-webkit-transform', 'transform' ];
-    for (var i = 0; i < transformProperties.length; i++) {
-      var property = transformProperties[i];
-      icon.style[property] = 'rotate(' + hotspot.rotation + 'rad)';
-    }
-
-    // Add click event handler.
-    wrapper.addEventListener('click', function() {
-      switchScene(findSceneById(hotspot.target));
+    var target = findSceneById(hotspot.target);
+    makeKeyboardButton(wrapper, 'Ir a ' + labelOf(target), function() {
+      switchScene(target);
     });
 
-    // Prevent touch and scroll events from reaching the parent element.
-    // This prevents the view control logic from interfering with the hotspot.
+    // Prevent the view control logic from interfering with the hotspot.
     stopTouchAndScrollEventPropagation(wrapper);
 
-    // Create tooltip element.
     var tooltip = document.createElement('div');
-    tooltip.classList.add('hotspot-tooltip');
-    tooltip.classList.add('link-hotspot-tooltip');
-    tooltip.innerHTML = findSceneDataById(hotspot.target).name;
+    tooltip.classList.add('hotspot-tooltip', 'link-hotspot-tooltip');
+    tooltip.textContent = labelOf(target);
 
     wrapper.appendChild(icon);
     wrapper.appendChild(tooltip);
-
     return wrapper;
   }
 
   function createInfoHotspotElement(hotspot) {
-
-    // Create wrapper element to hold icon and tooltip.
     var wrapper = document.createElement('div');
-    wrapper.classList.add('hotspot');
-    wrapper.classList.add('info-hotspot');
+    wrapper.classList.add('hotspot', 'info-hotspot');
 
-    // Create hotspot/tooltip header.
     var header = document.createElement('div');
     header.classList.add('info-hotspot-header');
 
-    // Create image element.
     var iconWrapper = document.createElement('div');
     iconWrapper.classList.add('info-hotspot-icon-wrapper');
     var icon = document.createElement('img');
     icon.src = 'img/info.png';
+    icon.alt = '';
     icon.classList.add('info-hotspot-icon');
     iconWrapper.appendChild(icon);
 
-    // Create title element.
+    // Title and text are authored in data.js and may contain markup such as <b>.
     var titleWrapper = document.createElement('div');
     titleWrapper.classList.add('info-hotspot-title-wrapper');
     var title = document.createElement('div');
@@ -457,29 +406,26 @@ document.addEventListener('DOMContentLoaded', function() {
     title.innerHTML = hotspot.title;
     titleWrapper.appendChild(title);
 
-    // Create close element.
     var closeWrapper = document.createElement('div');
     closeWrapper.classList.add('info-hotspot-close-wrapper');
     var closeIcon = document.createElement('img');
     closeIcon.src = 'img/close.png';
+    closeIcon.alt = 'Cerrar';
     closeIcon.classList.add('info-hotspot-close-icon');
     closeWrapper.appendChild(closeIcon);
 
-    // Construct header element.
     header.appendChild(iconWrapper);
     header.appendChild(titleWrapper);
     header.appendChild(closeWrapper);
 
-    // Create text element.
     var text = document.createElement('div');
     text.classList.add('info-hotspot-text');
     text.innerHTML = hotspot.text;
 
-    // Place header and text into wrapper element.
     wrapper.appendChild(header);
     wrapper.appendChild(text);
 
-    // Create a modal for the hotspot content to appear on mobile mode.
+    // Copy of the hotspot content shown as a modal in mobile mode.
     var modal = document.createElement('div');
     modal.innerHTML = wrapper.innerHTML;
     modal.classList.add('info-hotspot-modal');
@@ -489,29 +435,19 @@ document.addEventListener('DOMContentLoaded', function() {
       wrapper.classList.toggle('visible');
       modal.classList.toggle('visible');
     };
-
-    // Show content when hotspot is clicked.
-    wrapper.querySelector('.info-hotspot-header').addEventListener('click', toggle);
-
-    // Hide content when close icon is clicked.
+    makeKeyboardButton(header, null, toggle);
     modal.querySelector('.info-hotspot-close-wrapper').addEventListener('click', toggle);
 
-    // Prevent touch and scroll events from reaching the parent element.
-    // This prevents the view control logic from interfering with the hotspot.
     stopTouchAndScrollEventPropagation(wrapper);
-
     return wrapper;
   }
 
-  // Prevent touch and scroll events from reaching the parent element.
-  function stopTouchAndScrollEventPropagation(element, eventList) {
-    var eventList = [ 'touchstart', 'touchmove', 'touchend', 'touchcancel',
-                      'wheel', 'mousewheel' ];
-    for (var i = 0; i < eventList.length; i++) {
-      element.addEventListener(eventList[i], function(event) {
+  function stopTouchAndScrollEventPropagation(element) {
+    ['touchstart', 'touchmove', 'touchend', 'touchcancel', 'wheel', 'mousewheel'].forEach(function(name) {
+      element.addEventListener(name, function(event) {
         event.stopPropagation();
       });
-    }
+    });
   }
 
   function findSceneById(id) {
@@ -523,97 +459,106 @@ document.addEventListener('DOMContentLoaded', function() {
     return null;
   }
 
-  function findSceneDataById(id) {
-    for (var i = 0; i < data.scenes.length; i++) {
-      if (data.scenes[i].id === id) {
-        return data.scenes[i];
+  // Modals: any [data-modal] link opens one. They close with "Cerrar", the backdrop or Escape.
+  // While a modal is open everything behind it is inert, so focus stays in the dialog.
+  var lastFocus = null;
+  function setBackgroundInert(inert) {
+    var inTour = welcomeElement.classList.contains('is-leaving');
+    tourChrome.forEach(function(el) { el.inert = inert || !inTour; });
+    welcomeElement.inert = inert || inTour;
+  }
+  function openModal(id) {
+    var modal = document.getElementById(id);
+    lastFocus = document.activeElement;
+    setMenuOpen(false);
+    modal.classList.add('open');
+    setBackgroundInert(true);
+    modal.querySelector('.info-tour-modal-close').focus();
+  }
+  function closeModal(modal) {
+    modal.classList.remove('open');
+    setBackgroundInert(false);
+    if (lastFocus && !lastFocus.closest('[inert]')) {
+      lastFocus.focus();
+    }
+  }
+  document.querySelectorAll('[data-modal]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal(link.getAttribute('data-modal'));
+    });
+  });
+  document.querySelectorAll('.info-tour-modal').forEach(function(modal) {
+    modal.querySelector('.info-tour-modal-close').addEventListener('click', function() { closeModal(modal); });
+    modal.querySelector('.info-tour-modal-bg').addEventListener('click', function() { closeModal(modal); });
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Escape') {
+      return;
+    }
+    var open = document.querySelector('.info-tour-modal.open');
+    if (open) {
+      e.preventDefault(); // this Escape is used up; the chat stays open
+      closeModal(open);
+    } else {
+      setSceneListOpen(false);
+      setMenuOpen(false);
+    }
+  });
+
+  // Welcome screen: the first panorama loads behind it; entering pushes the camera in.
+  tourChrome.forEach(function(el) { el.inert = true; });
+  function enterTour(then) {
+    if (welcomeElement.classList.contains('is-leaving')) {
+      return;
+    }
+    welcomeElement.classList.add('is-leaving');
+    setBackgroundInert(false);
+    pushIn(currentScene);
+    if (then) {
+      then();
+    } else {
+      sceneListToggleElement.focus();
+    }
+  }
+  welcomeElement.querySelectorAll('[data-action]').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (el.getAttribute('data-action') === 'history') {
+        enterTour(function() { openModal('infoTourModal'); });
+      } else {
+        enterTour();
       }
+    });
+  });
+
+  // What the concierge chat (chat.js) needs from the tour.
+  window.tour = {
+    goTo: function(id) {
+      var s = findSceneById(id);
+      if (s) {
+        switchScene(s);
+      }
+    },
+    currentSceneId: function() {
+      return currentScene ? currentScene.data.id : null;
     }
-    return null;
-  }
-
-  // --- Menú lateral personalizado ---
-const customMenu = document.getElementById('customMenu');
-const customMenuToggle = document.getElementById('customMenuToggle');
-
-// Abrir/cerrar menú lateral
-customMenuToggle.addEventListener('click', function() {
-  customMenu.classList.toggle('open');
-});
-
-// Cerrar menú si se hace clic fuera (opcional)
-document.addEventListener('click', function(e) {
-  if (
-    customMenu.classList.contains('open') &&
-    !customMenu.contains(e.target) &&
-    !customMenuToggle.contains(e.target)
-  ) {
-    customMenu.classList.remove('open');
-  }
-});
-
-// --- Zona de título personalizada ---
-const customTitleSub = document.getElementById('customTitleSub');
-
-  function updateCustomTitleSub(scene) {
-    if (scene && scene.data && scene.data.name) {
-      customTitleSub.textContent = scene.data.name;
-    }
-  }
-
-  // Sobrescribe switchScene ANTES de llamar a switchScene(scenes[0])
-  const originalSwitchScene = switchScene;
-  switchScene = function(scene) {
-    stopAutorotate();
-    scene.view.setParameters(scene.data.initialViewParameters);
-    scene.scene.switchTo();
-    startAutorotate();
-    updateSceneList(scene);
-    updateCustomTitleSub(scene);
   };
 
-  // Inicializa el subtítulo con la primera escena
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof scenes !== 'undefined' && scenes.length > 0) {
-      updateCustomTitleSub(scenes[0]);
-    }
-    ordenarSceneListPorOrden();
-  });
-// --- Fin zona título personalizada ---
-  // Display the initial scene.
+  // Display the initial scene, then fill the scene list once the area names arrive.
   switchScene(scenes[0]);
-
-  // Order the scene list by the "orden" number in data-id attribute
-
-function ordenarSceneListPorOrden() {
-  var sceneList = document.querySelector('#sceneList .scenes');
-  var scenes = Array.from(sceneList.querySelectorAll('.scene'));
-
-  scenes.sort(function(a, b) {
-    // Extraer los números usando regex
-    var matchA = a.getAttribute('data-id').match(/^(\d+)-(\d+)-/);
-    var matchB = b.getAttribute('data-id').match(/^(\d+)-(\d+)-/);
-
-    // Si ambos tienen formato válido, ordenar por el segundo número
-    if (matchA && matchB) {
-      var ordenA = parseInt(matchA[2], 10);
-      var ordenB = parseInt(matchB[2], 10);
-      return ordenA - ordenB;
-    }
-    // Si solo A tiene formato válido, va antes
-    if (matchA) return -1;
-    // Si solo B tiene formato válido, va antes
-    if (matchB) return 1;
-    // Ninguno tiene formato válido, mantener orden original
-    return 0;
-  });
-
-  // Limpiar y volver a agregar en el nuevo orden
-  scenes.forEach(function(scene) {
-    sceneList.appendChild(scene);
-  });
-}
-
-document.addEventListener('DOMContentLoaded', ordenarSceneListPorOrden);
+  fetch('data/hotel.json')
+    .then(function(res) { return res.json(); })
+    .then(function(hotel) {
+      var names = {};
+      hotel.areas.forEach(function(a) { names[a.numero] = a.nombre; });
+      return names;
+    })
+    .catch(function() { return {}; })
+    .then(function(names) {
+      buildSceneList(names);
+      markCurrent(currentScene);
+    });
 
 })();

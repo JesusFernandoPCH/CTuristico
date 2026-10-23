@@ -1,0 +1,124 @@
+// Runs with `npm test`: exercises validation and the tool loop against a scripted fake client.
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { parseRequest, runChat, buildSystem, resolvePlace, REFUSAL_REPLY, RequestError } from '../src/chat.js';
+import { runChatWorkersAI } from '../src/workers-ai.js';
+
+const catalog = JSON.parse(fs.readFileSync(new URL('../src/catalog.json', import.meta.url), 'utf8'));
+const scenesById = new Map(catalog.scenes.map((s) => [s.id, s]));
+const JACUZZI = '157-38-alberca-bicentenario-jacuzzi_';
+const config = { model: 'claude-opus-5-5', effort: 'low' };
+
+function fakeClient(responses) {
+  const calls = [];
+  return {
+    calls,
+    beta: { messages: { create: async (params) => {
+      calls.push(structuredClone(params));
+      return responses.shift();
+    } } }
+  };
+}
+
+test('parseRequest keeps a valid history and drops a leading assistant turn', () => {
+  const body = { messages: [
+    { role: 'assistant', content: 'Hola' },
+    { role: 'user', content: ' ¿Dónde está el spa? ' }
+  ], sceneId: JACUZZI };
+  const out = parseRequest(body, scenesById);
+  assert.deepEqual(out.messages, [{ role: 'user', content: '¿Dónde está el spa?' }]);
+  assert.equal(out.sceneId, JACUZZI);
+});
+
+test('parseRequest rejects bad input and ignores unknown scene ids', () => {
+  assert.throws(() => parseRequest({}, scenesById), RequestError);
+  assert.throws(() => parseRequest({ messages: [{ role: 'system', content: 'x' }] }, scenesById), RequestError);
+  assert.throws(() => parseRequest({ messages: [{ role: 'user', content: 'x'.repeat(1001) }] }, scenesById), RequestError);
+  assert.throws(() => parseRequest({ messages: [{ role: 'user', content: 'hola' }, { role: 'assistant', content: 'hola' }] }, scenesById), RequestError);
+  assert.equal(parseRequest({ messages: [{ role: 'user', content: 'hola' }], sceneId: 'no-existe' }, scenesById).sceneId, null);
+});
+
+test('parseRequest accepts long earlier replies from the assistant', () => {
+  const body = { messages: [
+    { role: 'user', content: 'Cuéntame la historia' },
+    { role: 'assistant', content: 'x'.repeat(2500) },
+    { role: 'user', content: 'Gracias' }
+  ] };
+  assert.equal(parseRequest(body, scenesById).messages.length, 3);
+});
+
+test('the system prompt caches the hotel data block and lists the views per area', () => {
+  const system = buildSystem(catalog);
+  assert.equal(system.at(-1).cache_control.type, 'ephemeral');
+  assert.match(system.at(-1).text, /\n38: .*Jacuzzi/);
+  assert.ok(system.at(-1).text.includes('La Distral'));
+});
+
+test('resolvePlace matches the detail, ignores accents, and defaults to the first view', () => {
+  assert.equal(resolvePlace(38, 'Jacuzzi', catalog).id, JACUZZI);
+  assert.equal(resolvePlace(35, '', catalog).id, '256-35-spa-entrada');
+  assert.equal(resolvePlace('35', 'banos mujeres', catalog).id, '305-35-spa-baos-mujeres');
+  assert.equal(resolvePlace(26, 'nada parecido', catalog).id, catalog.scenes.find((s) => s.name.startsWith('26. ')).id);
+  assert.equal(resolvePlace(99, '', catalog), null);
+});
+
+test('mostrar_lugar with a valid id returns a goto action and the final text', async () => {
+  const client = fakeClient([
+    { stop_reason: 'tool_use', content: [{ type: 'tool_use', id: 't1', name: 'mostrar_lugar', input: { area: 38, detalle: 'Jacuzzi' } }], usage: {} },
+    { stop_reason: 'end_turn', content: [{ type: 'text', text: 'Te llevé al jacuzzi.' }], usage: {} }
+  ]);
+  const out = await runChat(client, config, catalog, { messages: [{ role: 'user', content: 'Llévame al jacuzzi' }], sceneId: '0-15-recepcin' });
+  assert.deepEqual(out, { reply: 'Te llevé al jacuzzi.', action: { type: 'goto', sceneId: JACUZZI } });
+
+  const [first, second] = client.calls;
+  assert.equal(first.messages.at(-1).role, 'system', 'current scene goes after the user turn');
+  assert.deepEqual(first.fallbacks, 'default');
+  const toolResult = second.messages.at(-1).content[0];
+  assert.equal(toolResult.tool_use_id, 't1');
+  assert.equal(toolResult.is_error, undefined);
+});
+
+test('an unknown scene id comes back as a tool error and moves nothing', async () => {
+  const client = fakeClient([
+    { stop_reason: 'tool_use', content: [{ type: 'tool_use', id: 't1', name: 'mostrar_lugar', input: { area: 99, detalle: '' } }], usage: {} },
+    { stop_reason: 'end_turn', content: [{ type: 'text', text: 'No encontré esa vista.' }], usage: {} }
+  ]);
+  const out = await runChat(client, config, catalog, { messages: [{ role: 'user', content: 'Llévame' }], sceneId: null });
+  assert.equal(out.action, null);
+  assert.equal(client.calls[1].messages.at(-1).content[0].is_error, true);
+});
+
+function fakeAI(responses) {
+  const calls = [];
+  return { calls, run: async (model, params) => { calls.push(structuredClone(params)); return responses.shift(); } };
+}
+
+test('workers-ai: a tool call (string or object arguments) moves the tour', async () => {
+  for (const args of [{ area: 38, detalle: 'jacuzzi' }, JSON.stringify({ area: 38, detalle: 'jacuzzi' })]) {
+    const ai = fakeAI([
+      { response: '', tool_calls: [{ name: 'mostrar_lugar', arguments: args }] },
+      { response: 'Te llevé al jacuzzi.' }
+    ]);
+    const out = await runChatWorkersAI(ai, { model: 'm' }, catalog, { messages: [{ role: 'user', content: 'Llévame al jacuzzi' }], sceneId: '0-15-recepcin' });
+    assert.deepEqual(out, { reply: 'Te llevé al jacuzzi.', action: { type: 'goto', sceneId: JACUZZI } });
+    assert.ok(ai.calls[0].messages[0].content.includes('El visitante está viendo ahora'));
+    assert.equal(ai.calls[1].messages.at(-1).role, 'tool');
+  }
+});
+
+test('workers-ai: an unknown id moves nothing and a plain answer passes through', async () => {
+  const ai = fakeAI([
+    { response: '', tool_calls: [{ name: 'mostrar_lugar', arguments: { area: 99, detalle: '' } }] },
+    { response: 'No encontré esa vista.' }
+  ]);
+  const out = await runChatWorkersAI(ai, { model: 'm' }, catalog, { messages: [{ role: 'user', content: 'x' }], sceneId: null });
+  assert.equal(out.action, null);
+  assert.ok(ai.calls[1].messages.at(-1).content.startsWith('Esa área no existe'));
+});
+
+test('a refusal returns the canned reply', async () => {
+  const client = fakeClient([{ stop_reason: 'refusal', content: [], usage: {} }]);
+  const out = await runChat(client, config, catalog, { messages: [{ role: 'user', content: '...' }], sceneId: null });
+  assert.equal(out.reply, REFUSAL_REPLY);
+});
