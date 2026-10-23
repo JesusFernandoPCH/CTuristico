@@ -55,7 +55,7 @@
     fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: history.slice(-12), sceneId: window.tour.currentSceneId() })
+      body: JSON.stringify({ messages: history.slice(-8), sceneId: window.tour.currentSceneId() })
     })
       .then(function(res) {
         return res.json().catch(function() { return {}; }).then(function(data) {

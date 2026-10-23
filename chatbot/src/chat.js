@@ -2,7 +2,7 @@
 import { INSTRUCTIONS } from './prompt.js';
 
 // maxChars caps what a visitor types; earlier assistant replies echoed back in the history get more room.
-export const LIMITS = { maxMessages: 20, maxChars: 1000, maxReplyChars: 4000, maxToolRounds: 3, maxTokens: 4000 };
+export const LIMITS = { maxMessages: 8, maxChars: 400, maxReplyChars: 4000, maxToolRounds: 3, maxTokens: 4000 };
 
 export const REFUSAL_REPLY = 'No puedo ayudarte con eso. ¿Quieres que te muestre algún lugar del hotel?';
 
@@ -23,7 +23,7 @@ export const TOOLS = [
   }
 ];
 
-function normalize(text) {
+export function normalize(text) {
   return text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 }
 
