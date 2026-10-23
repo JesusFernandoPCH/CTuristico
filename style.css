@@ -420,11 +420,13 @@ body.fullscreen-enabled #fullscreenToggle { display: grid; }
 .info-tour-desc { line-height: 1.6; }
 .info-tour-desc p { margin: 0 0 1.1em; }
 .info-tour-desc strong { font-weight: 500; }
+/* Capped at 480px: the smallest inline photos are ~960px wide, which stays sharp at 2x screens */
 .info-tour-img-inline {
   display: block;
   width: 100%;
+  max-width: 480px;
   height: auto;
-  margin: 32px 0;
+  margin: 32px auto;
 }
 .info-tour-gallery {
   display: grid;
