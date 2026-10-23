@@ -9,5 +9,10 @@ vm.runInNewContext(fs.readFileSync(new URL('data.js', root), 'utf8') + ';this.AP
 const hotel = JSON.parse(fs.readFileSync(new URL('data/hotel.json', root), 'utf8'));
 
 const scenes = ctx.APP_DATA.scenes.map((s) => ({ id: s.id, name: s.name }));
-fs.writeFileSync(new URL('src/catalog.json', import.meta.url), JSON.stringify({ hotel, scenes }));
+const out = new URL('src/catalog.json', import.meta.url);
+const next = JSON.stringify({ hotel, scenes });
+// Write only on change: `wrangler dev` watches src/, so rewriting an identical file would rebuild forever.
+if (!fs.existsSync(out) || fs.readFileSync(out, 'utf8') !== next) {
+  fs.writeFileSync(out, next);
+}
 console.log(`catalog: ${scenes.length} scenes, ${hotel.areas.length} areas`);

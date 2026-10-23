@@ -2,6 +2,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import catalog from './catalog.json';
 import { parseRequest, runChat, RequestError } from './chat.js';
+import { runChatWorkersAI } from './workers-ai.js';
 
 const scenesById = new Map(catalog.scenes.map((s) => [s.id, s]));
 const MAX_BODY_BYTES = 32 * 1024;
@@ -50,13 +51,12 @@ export default {
       return json({ error: message }, 400, cors);
     }
 
-    const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1 });
+    const onUsage = (usage, model) => console.log(JSON.stringify({ event: 'usage', provider: env.PROVIDER, model, usage }));
     try {
-      const result = await runChat(client, {
-        model: env.MODEL,
-        effort: env.EFFORT,
-        onUsage: (usage, model) => console.log(JSON.stringify({ event: 'usage', model, usage }))
-      }, catalog, input);
+      // PROVIDER picks the model backend: "workers-ai" (free daily quota) or "anthropic" (Claude, paid).
+      const result = env.PROVIDER === 'anthropic'
+        ? await runChat(new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1 }), { model: env.MODEL, effort: env.EFFORT, onUsage }, catalog, input)
+        : await runChatWorkersAI(env.AI, { model: env.WORKERS_AI_MODEL, onUsage }, catalog, input);
       return json(result, 200, cors);
     } catch (err) {
       console.error(err);
@@ -66,7 +66,8 @@ export default {
       if (err instanceof Anthropic.APIError) {
         return json({ error: 'El asistente no está disponible por ahora.' }, 502, cors);
       }
-      return json({ error: 'Ocurrió un error inesperado.' }, 500, cors);
+      // Workers AI failures (including the free daily quota running out) land here.
+      return json({ error: 'El asistente no está disponible por ahora. Inténtalo más tarde.' }, 503, cors);
     }
   }
 };

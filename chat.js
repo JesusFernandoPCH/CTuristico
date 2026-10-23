@@ -69,7 +69,8 @@
         pending.textContent = data.reply;
         pending.classList.remove('is-pending');
         history.push({ role: 'assistant', content: data.reply });
-        if (data.action && data.action.type === 'goto') {
+        // Skip a move to the view already on screen: it would only reset the visitor's camera.
+        if (data.action && data.action.type === 'goto' && data.action.sceneId !== window.tour.currentSceneId()) {
           window.tour.goTo(data.action.sceneId);
         }
       })

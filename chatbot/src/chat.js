@@ -9,32 +9,86 @@ export const REFUSAL_REPLY = 'No puedo ayudarte con eso. ¿Quieres que te muestr
 export const TOOLS = [
   {
     name: 'mostrar_lugar',
-    description: 'Mueve el recorrido 360° del visitante a una vista del hotel. Úsala cuando el visitante quiera ver, visitar o ubicar un lugar. scene_id debe ser un id exacto del catálogo de vistas.',
+    description: 'Mueve el recorrido 360° del visitante a un lugar del hotel. Úsala solo cuando el visitante pida ver, ir a o ubicar un lugar.',
     input_schema: {
       type: 'object',
       properties: {
-        scene_id: { type: 'string', description: 'Id exacto de la vista, tal como aparece en el catálogo (por ejemplo "157-38-alberca-bicentenario-jacuzzi_").' }
+        area: { type: 'integer', description: 'Número del área en el mapa del hotel (1 a 40).' },
+        detalle: { type: 'string', description: 'Vista concreta dentro del área, tal como aparece en la lista de vistas (por ejemplo "Jacuzzi" o "Sauna"). Vacío para la vista general.' }
       },
-      required: ['scene_id'],
+      required: ['area', 'detalle'],
       additionalProperties: false
     },
     strict: true
   }
 ];
 
+function normalize(text) {
+  return text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
 export class RequestError extends Error {}
 
-// The stable prefix: instructions, then the hotel data and scene catalog (cached).
+// Scene names are "<area>. <label>"; group the labels by area number.
+function viewsByArea(catalog) {
+  const byArea = new Map();
+  for (const s of catalog.scenes) {
+    const m = /^(\d+)\.\s*(.*)$/.exec(s.name);
+    const area = Number(m[1]);
+    if (!byArea.has(area)) byArea.set(area, []);
+    byArea.get(area).push({ scene: s, label: m[2] });
+  }
+  return byArea;
+}
+
+// Hotel data and the views available in each area, shared by every provider.
+export function catalogText(catalog) {
+  const lines = [...viewsByArea(catalog)].sort((a, b) => a[0] - b[0]).map(([area, views]) =>
+    `${area}: ${[...new Set(views.map((v) => v.label))].join('; ')}`);
+  return `Datos del hotel (JSON):\n${JSON.stringify(catalog.hotel)}\n\nVistas del tour por área (número de área: vistas disponibles):\n${lines.join('\n')}`;
+}
+
+// Picks the view of an area whose label shares the most words with `detalle`.
+// Ties (and no detalle) go to the area's first view in tour order, usually its entrance or general view.
+export function resolvePlace(area, detalle, catalog) {
+  const views = viewsByArea(catalog).get(Number(area));
+  if (!views) {
+    return null;
+  }
+  const words = normalize(detalle || '').split(/[^a-z0-9]+/).filter((w) => w.length > 2);
+  let best = views[0].scene;
+  let bestScore = 0;
+  for (const v of views) {
+    const label = normalize(v.label);
+    const score = words.filter((w) => label.includes(w)).length;
+    if (score > bestScore) {
+      best = v.scene;
+      bestScore = score;
+    }
+  }
+  return best;
+}
+
+// The stable prefix for Claude: instructions, then the hotel data and scene catalog (cached).
 export function buildSystem(catalog) {
-  const sceneLines = catalog.scenes.map((s) => `${s.id} | ${s.name}`).join('\n');
   return [
     { type: 'text', text: INSTRUCTIONS },
-    {
-      type: 'text',
-      text: `Datos del hotel (JSON):\n${JSON.stringify(catalog.hotel)}\n\nCatálogo de vistas del tour (id | nombre; el número al inicio del nombre es el área del mapa):\n${sceneLines}`,
-      cache_control: { type: 'ephemeral' }
-    }
+    { type: 'text', text: catalogText(catalog), cache_control: { type: 'ephemeral' } }
   ];
+}
+
+// Executes mostrar_lugar for any provider. `input` is the tool's { area, detalle }.
+export function showPlace(input, catalog) {
+  const scene = input ? resolvePlace(input.area, input.detalle, catalog) : null;
+  if (!scene) {
+    return { action: null, scene: null, isError: true, text: 'Esa área no existe. Usa un número de área del 1 al 40.' };
+  }
+  return { action: { type: 'goto', sceneId: scene.id }, scene, isError: false, text: `Listo: el visitante ya está viendo ${scene.name}.` };
+}
+
+// Reply to use when the model moved the tour but wrote no text.
+export function movedReply(scene) {
+  return `Te llevé a ${scene.name.replace(/^\d+\.\s*/, '')}.`;
 }
 
 // Validates the visitor's payload: a short text-only history ending in a user turn.
@@ -79,7 +133,9 @@ export async function runChat(client, config, catalog, { messages, sceneId }) {
   }
 
   let action = null;
+  let moved = null;
   let lastText = '';
+  const finalReply = () => lastText || (moved ? movedReply(moved) : 'Listo.');
   for (let round = 0; round <= LIMITS.maxToolRounds; round++) {
     const response = await client.beta.messages.create({
       model: config.model,
@@ -98,20 +154,20 @@ export async function runChat(client, config, catalog, { messages, sceneId }) {
     }
     lastText = textOf(response) || lastText;
     if (response.stop_reason !== 'tool_use') {
-      return { reply: lastText || 'Listo.', action };
+      return { reply: finalReply(), action };
     }
 
     // Append the assistant turn unchanged (thinking blocks included), then answer every tool call.
     convo.push({ role: 'assistant', content: response.content });
     const results = response.content.filter((b) => b.type === 'tool_use').map((call) => {
-      const scene = call.name === 'mostrar_lugar' && scenesById.get(call.input?.scene_id);
-      if (!scene) {
-        return { type: 'tool_result', tool_use_id: call.id, is_error: true, content: 'No existe una vista con ese id. Usa un id exacto del catálogo.' };
-      }
-      action = { type: 'goto', sceneId: scene.id };
-      return { type: 'tool_result', tool_use_id: call.id, content: `Listo: el visitante ya está viendo ${scene.name}.` };
+      const result = showPlace(call.name === 'mostrar_lugar' ? call.input : null, catalog);
+      action = result.action || action;
+      moved = result.scene || moved;
+      return result.isError
+        ? { type: 'tool_result', tool_use_id: call.id, is_error: true, content: result.text }
+        : { type: 'tool_result', tool_use_id: call.id, content: result.text };
     });
     convo.push({ role: 'user', content: results });
   }
-  return { reply: lastText || 'Listo.', action };
+  return { reply: finalReply(), action };
 }

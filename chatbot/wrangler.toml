@@ -9,8 +9,14 @@ command = "node build-catalog.mjs"
 [vars]
 # Sites allowed to call the chat endpoint (comma separated).
 ALLOWED_ORIGINS = "https://jesusfernandopch.github.io,http://127.0.0.1:8765,http://localhost:8765"
+# "workers-ai": free daily quota on Cloudflare. "anthropic": Claude (needs the ANTHROPIC_API_KEY secret and credits).
+PROVIDER = "workers-ai"
+WORKERS_AI_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 MODEL = "claude-opus-5-5"
 EFFORT = "low"
+
+[ai]
+binding = "AI"
 
 # Per-visitor limit: 10 messages per minute (approximate, applied per Cloudflare location).
 [[ratelimits]]
@@ -21,5 +27,5 @@ namespace_id = "1001"
   limit = 10
   period = 60
 
-# ANTHROPIC_API_KEY is a secret: `npx wrangler secret put ANTHROPIC_API_KEY`
+# Only for PROVIDER = "anthropic": `npx wrangler secret put ANTHROPIC_API_KEY`
 # (for `wrangler dev`, put it in .dev.vars, which is git-ignored).
